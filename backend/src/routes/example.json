@@ -1,0 +1,472 @@
+{
+    "name": "example_project_1",
+    "owner": "****",
+    "create_time": "03/06/23",
+    "last_edit": "03/06/23",
+    "coding_level": "Paragraph",
+    "input_docs": "Straight to the point, it's cheap, it tastes and feels cheap. The good: price, location, dessert (recommended food items are: baked chicken, fried chicken, potatoes, Salad, meat and cheese, pizza) also our waitress was great. The normal: behind the counter meat slicing station, shrimp (not even deshelled), Mexican station. The bad: breakfast -worst eggs ever, actually worst, eggs. The chef can't even cut through ham or hard bread (tried on all 3 occasions), beef, shrimp again. As for decoration, it's the 1970 nightmare you can imagine. \n\n\nWe started with the burger set, a big mistake. It was cold and the fries were old. Mentioned to our waitress, but nothing came of it.  We ordered a large thin pizza which was a bit pricey after adding toppings. Pizza was ok, not great. Aside from not being our advocate, our server was good.  I have been here before for a football game, it was better then. Will try another venue next time.\n\n\nThis is a so-called restaurant that doesn't do anything a restaurant should do except preparing food, the rest is left to the guest. Do you want water? Get up and go across the yard to get it. If you want a drink, go downstairs and pay in cash. Want to sit in dirty deckchairs in a dirty garden, enjoy yourself. The waiters are a little bit helpful as they bring you your food after you go to the window and pay cash for it. Kind of like New Orleans Hamburger and Seafood, but dirty and with live music (which is nice). It's a once in a lifetime experience for me... just once.\n\n\nMy brother came to visit and we wanted to pick up a six pack of good beer for one night. We ended up staying and having a few while playing their Nintendo 64 (Super Smash Brothers which the owner said was donated by other customers). It's a great place with good food and really nice people. Should be a staple in the Northeast.\n\n\nMy menu is coconut soup and pat thai with protein. I tried the same menu here. Actually really like their coconut soup. They used enough coconut milk that the soup was really creamy and not overpowered with herbs. I'm so used to Americanized Thai cuisine that I prefer fewer herbs on my dish. Pat Thai was great too. I liked the amount of peanuts they used, the noodles were chewy and perfect and not too sweet. They gave me a generous amount of chicken and white meat was not dry so I was very happy with my meal.\n\n\nI stopped here because it was close to the hotel I was staying at. The people working in the store were super nice and friendly. I like the buy one get one offer they do. I also ordered some hot wings and they were pretty good. They had a ton of sauce which is awesome. Next time I come back to town I will definitely stop here for more pizza!\n\n\nJust started going to Sushi Nara this month (they only recently opened). I love this place; It's clean, the staff is friendly and courteous, and the service is quick. The sushi is always delicious (I've been here 3 times) and the prices are reasonable. In fact, my husband stopped by for take out this week, bought 4 sushi rolls and the total price was $24. That's incredible. I love the freshness of the food and there is a huge variety. Everyone on the east side, check out this place!\n\n\nWe had a party of 6 here for hibachi. Our waitress put our separate sushi orders on one plate so we couldn't really tell who was who and forgot several items on one order. I understand that I made mistakes but the restaurant was very quiet so we were a bit surprised. Usually hibachi is a fun lively experience and our chef said maybe three words but he cooked very well, his name was Francisco. The service was lazy, the food was pretty good and I hope it was just a free night here. But for the money I wouldn't go again.\n",
+    "file_names": "help.txt",
+    "coders": [
+        {
+            "name": "****"
+        },
+        {
+            "name": "Alice"
+        }
+    ],
+    "segmented_data": [
+        {
+            "id": 0,
+            "interview_data": "Straight to the point, it's cheap, it tastes and feels cheap. The good: price, location, dessert (recommended food items are: baked chicken, fried chicken, potatoes, Salad, meat and cheese, pizza) also our waitress was great. The normal: behind the counter meat slicing station, shrimp (not even deshelled), Mexican station. The bad: breakfast -worst eggs ever, actually worst, eggs. The chef can't even cut through ham or hard bread (tried on all 3 occasions), beef, shrimp again. As for decoration, it's the 1970 nightmare you can imagine.",
+            "codes": [
+                {
+                    "author": "****",
+                    "code": "Cheap but low quality food.",
+                    "time": "19/03/2023, 23:45:50",
+                    "uncertainty": 5,
+                    "code_source": "ChatGPT"
+                },
+                {
+                    "author": "Alice",
+                    "code": "Cheap food, outdated decoration.",
+                    "time": "13/03/2023, 10:14:16",
+                    "uncertainty": 4
+                }
+            ],
+            "keywords": [
+                {
+                    "author": "****",
+                    "keywords": [
+                        "The normal: behind the counter meat",
+                        "actually worst, eggs",
+                        "fried chicken",
+                        "Salad, meat and cheese, pizza) also our waitress was great. The normal: behind the counter"
+                    ]
+                },
+                {
+                    "author": "Alice",
+                    "keywords": [
+                        "it's cheap, it tastes and feels cheap",
+                        "it's the 1970 nightmare you can imagine.",
+                        "worst eggs ever, actually worst, eggs"
+                    ]
+                }
+            ],
+            "decision": {
+                "author": "****",
+                "decision": "Affordable, lackluster atmosphere, average food."
+            },
+            "similarity": {
+                "word1": "Cheap but low quality food.",
+                "word2": "Cheap food, outdated decoration.",
+                "score": 0.8935
+            }
+        },
+        {
+            "id": 1,
+            "interview_data": "We started with the burger set, a big mistake. It was cold and the fries were old. Mentioned to our waitress, but nothing came of it.  We ordered a large thin pizza which was a bit pricey after adding toppings. Pizza was ok, not great. Aside from not being our advocate, our server was good.  I have been here before for a football game, it was better then. Will try another venue next time.",
+            "codes": [
+                {
+                    "author": "****",
+                    "code": "Cheap but meh food.",
+                    "code_source": "****",
+                    "time": "14/03/2023, 22:45:41",
+                    "uncertainty": 5
+                },
+                {
+                    "author": "Alice",
+                    "code": "Not-advocate/Bad-food",
+                    "time": "08/03/2023, 09:06:17",
+                    "uncertainty": 4,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Cold burger, pricey pizza.",
+                            "Not great, better elsewhere.",
+                            "Server okay, not advocate."
+                        ],
+                        "similarCodes": [
+                            "Server not advocate, bad food.",
+                            "Chef Francisco, mistake-prone.",
+                            "Bad service."
+                        ]
+                    }
+                }
+            ],
+            "keywords": [
+                {
+                    "author": "****",
+                    "keywords": [
+                        "a bit pricey",
+                        "Pizza was ok, not great.",
+                        "Will try another venue next time"
+                    ]
+                },
+                {
+                    "author": "Alice",
+                    "keywords": [
+                        "Mentioned to our waitress, but nothing came of it.",
+                        "Pizza was ok, not great."
+                    ]
+                }
+            ],
+            "decision": {
+                "author": "****",
+                "decision": "Mediocre food, poor service"
+            },
+            "similarity": {
+                "word1": "Cheap but meh food.",
+                "word2": "Not-advocate/Bad-food",
+                "score": 0.6638
+            }
+        },
+        {
+            "id": 2,
+            "interview_data": "This is a so-called restaurant that doesn't do anything a restaurant should do except preparing food, the rest is left to the guest. Do you want water? Get up and go across the yard to get it. If you want a drink, go downstairs and pay in cash. Want to sit in dirty deckchairs in a dirty garden, enjoy yourself. The waiters are a little bit helpful as they bring you your food after you go to the window and pay cash for it. Kind of like New Orleans Hamburger and Seafood, but dirty and with live music (which is nice). It's a once in a lifetime experience for me... just once.",
+            "codes": [
+                {
+                    "author": "****",
+                    "code": "Limited restaurant",
+                    "time": "12/03/2023, 20:43:01",
+                    "uncertainty": 3,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "No-frills restaurant with live music",
+                            "Guest does everything but eating",
+                            "Unique but dirty dining experience"
+                        ],
+                        "similarCodes": [
+                            "Limited restaurant ",
+                            "Mistakes, but good food. ",
+                            "Cheap, mediocre"
+                        ]
+                    }
+                },
+                {
+                    "author": "Alice",
+                    "code": "Limited restaurant",
+                    "time": "12/03/2023, 20:43:01",
+                    "uncertainty": 3,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Dirty restaurant, cash only.",
+                            "Dirty experience, cash only.",
+                            "Filthy, live music, cash."
+                        ],
+                        "similarCodes": [
+                            "Dirty outdoor restaurant experience.",
+                            "Bad service.",
+                            "Server not advocate, bad food."
+                        ]
+                    }
+                }
+            ],
+            "keywords": [
+                {
+                    "author": "****",
+                    "keywords": [
+                        "the rest is left to the guest.",
+                        "dirty and with live music"
+                    ]
+                },
+                {
+                    "author": "Alice",
+                    "keywords": [
+                        "The waiters are a little bit helpful",
+                        "It's a once in a lifetime experience"
+                    ]
+                }
+            ],
+            "similarity": {
+                "word1": "Limited restaurant",
+                "word2": "Limited restaurant",
+                "score": 1
+            },
+            "decision": {
+                "author": "****",
+                "decision": "Basic self-serve restaurant"
+            }
+        },
+        {
+            "id": 3,
+            "interview_data": "My brother came to visit and we wanted to pick up a six pack of good beer for one night. We ended up staying and having a few while playing their Nintendo 64 (Super Smash Brothers which the owner said was donated by other customers). It's a great place with good food and really nice people. Should be a staple in the Northeast.",
+            "codes": [
+                {
+                    "author": "****",
+                    "code": "Great food, beer, Smash.",
+                    "time": "08/03/2023, 09:11:56",
+                    "uncertainty": 5
+                },
+                {
+                    "author": "Alice",
+                    "code": "Great food, beer, Smash.",
+                    "time": "08/03/2023, 09:11:56",
+                    "uncertainty": 3
+                }
+            ],
+            "keywords": [
+                {
+                    "author": "****",
+                    "keywords": [
+                        "great place with good food",
+                        "nice people"
+                    ]
+                },
+                {
+                    "author": "Alice",
+                    "keywords": [
+                        "Nintendo 64",
+                        "great place",
+                        "good food",
+                        "really nice people"
+                    ]
+                }
+            ],
+            "similarity": {
+                "word1": "Great food, beer, Smash.",
+                "word2": "Great food, beer, Smash.",
+                "score": 1
+            },
+            "decision": {
+                "author": "Alice",
+                "decision": "Great food, beer, Smash.",
+                "backup_codes": []
+            }
+        },
+        {
+            "id": 4,
+            "interview_data": "My menu is coconut soup and pat thai with protein. I tried the same menu here. Actually really like their coconut soup. They used enough coconut milk that the soup was really creamy and not overpowered with herbs. I'm so used to Americanized Thai cuisine that I prefer fewer herbs on my dish. Pat Thai was great too. I liked the amount of peanuts they used, the noodles were chewy and perfect and not too sweet. They gave me a generous amount of chicken and white meat was not dry so I was very happy with my meal.",
+            "codes": [
+                {
+                    "author": "****",
+                    "code": "Creamy coconut soup, pat thai.",
+                    "time": "08/03/2023, 12:00:18",
+                    "uncertainty": 5
+                },
+                {
+                    "author": "Alice",
+                    "code": "Coconut Soup, Pat Thai, Yum!",
+                    "time": "08/03/2023, 11:59:30",
+                    "uncertainty": 5
+                }
+            ],
+            "keywords": [
+                {
+                    "author": "****",
+                    "keywords": [
+                        "Pat Thai was great",
+                        "the noodles were chewy and perfect"
+                    ]
+                },
+                {
+                    "author": "Alice",
+                    "keywords": [
+                        "really creamy",
+                        "not overpowered with herbs",
+                        "Pat Thai was great too"
+                    ]
+                }
+            ],
+            "similarity": {
+                "word1": "Creamy coconut soup, pat thai.",
+                "word2": "Coconut Soup, Pat Thai, Yum!",
+                "score": 0.9232
+            },
+            "decision": {
+                "author": "Alice",
+                "decision": "Delicious PatThai",
+                "backup_codes": []
+            }
+        },
+        {
+            "id": 5,
+            "interview_data": "I stopped here because it was close to the hotel I was staying at. The people working in the store were super nice and friendly. I like the buy one get one offer they do. I also ordered some hot wings and they were pretty good. They had a ton of sauce which is awesome. Next time I come back to town I will definitely stop here for more pizza!",
+            "codes": [
+                {
+                    "author": "****",
+                    "code": "Good pizza, nice people, BOGO.",
+                    "time": "06/03/2023, 16:03:00",
+                    "uncertainty": 5
+                },
+                {
+                    "author": "Alice",
+                    "code": "Friendly staff, buy-one-get-one offer.",
+                    "time": "06/03/2023, 16:03:57",
+                    "uncertainty": 4,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Friendly, great pizza and wings.",
+                            "Buy 1, get 1 pizza offer.",
+                            "Close to hotel, tasty wings."
+                        ],
+                        "similarCodes": [
+                            "Friendly staff, quick service.",
+                            "Server not advocate, bad food.",
+                            "Chef Francisco, mistake-prone."
+                        ]
+                    }
+                }
+            ],
+            "keywords": [
+                {
+                    "author": "****",
+                    "keywords": [
+                        "ordered some hot wings",
+                        "sauce which is awesome"
+                    ]
+                },
+                {
+                    "author": "Alice",
+                    "keywords": [
+                        "ordered some hot wings",
+                        "were super nice and friendly"
+                    ]
+                }
+            ],
+            "similarity": {
+                "word1": "Good pizza, nice people, BOGO.",
+                "word2": "Friendly staff, buy-one-get-one offer.",
+                "score": 0.7148
+            },
+            "decision": {
+                "author": [
+                    {
+                        "name": "****"
+                    },
+                    {
+                        "name": "Alice"
+                    }
+                ],
+                "decision": "Good pizza, nice staff.",
+                "backup_codes": []
+            }
+        },
+        {
+            "id": 6,
+            "interview_data": "Just started going to Sushi Nara this month (they only recently opened). I love this place; It's clean, the staff is friendly and courteous, and the service is quick. The sushi is always delicious (I've been here 3 times) and the prices are reasonable. In fact, my husband stopped by for take out this week, bought 4 sushi rolls and the total price was $24. That's incredible. I love the freshness of the food and there is a huge variety. Everyone on the east side, check out this place!",
+            "codes": [
+                {
+                    "author": "****",
+                    "code": "Sushi Nara: Quick and Fresh.",
+                    "time": "06/03/2023, 16:03:06",
+                    "uncertainty": 5
+                },
+                {
+                    "author": "Alice",
+                    "code": "Friendly staff, quick service.",
+                    "time": "06/03/2023, 16:04:02",
+                    "uncertainty":4
+                }
+            ],
+            "keywords": [
+                {
+                    "author": "****",
+                    "keywords": [
+                        "sushi is always delicious",
+                        "the prices are reasonable.",
+                        "Everyone on the east side, check out this place!"
+                    ]
+                },
+                {
+                    "author": "Alice",
+                    "keywords": [
+                        "It's clean",
+                        "staff is friendly and courteous",
+                        "I love the freshness of the food"
+                    ]
+                }
+            ],
+            "similarity": {
+                "word1": "Sushi Nara: Quick and Fresh.",
+                "word2": "Friendly staff, quick service.",
+                "score": 0.6117
+            },
+            "decision": {
+                "author": "****",
+                "decision": "Fresh sushi, friendly staff, quick service.",
+                "backup_codes": []
+            }
+        },
+        {
+            "id": 7,
+            "interview_data": "We had a party of 6 here for hibachi. Our waitress put our separate sushi orders on one plate so we couldn't really tell who was who and forgot several items on one order. I understand that I made mistakes but the restaurant was very quiet so we were a bit surprised. Usually hibachi is a fun lively experience and our chef said maybe three words but he cooked very well, his name was Francisco. The service was lazy, the food was pretty good and I hope it was just a free night here. But for the money I wouldn't go again.",
+            "codes": [
+                {
+                    "author": "****",
+                    "code": "Mistakes, but good food.",
+                    "time": "06/03/2023, 16:03:12",
+                    "uncertainty": 5
+                },
+                {
+                    "author": "Alice",
+                    "code": "Chef Francisco, mistake-prone.",
+                    "time": "06/03/2023, 16:04:07",
+                    "uncertainty": 4,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Poor service, good food.",
+                            "Quiet, forgetful service.",
+                            "Francisco cooked well, service lacking."
+                        ],
+                        "similarCodes": [
+                            "swer:",
+                            "Server not advocate, bad food.",
+                            "Chef Francisco, mistake-prone.",
+                            "Bad service."
+                        ]
+                    }
+                }
+            ],
+            "keywords": [
+                {
+                    "author": "****",
+                    "keywords": [
+                        "the restaurant was very quiet",
+                        "ervice was lazy,"
+                    ]
+                },
+                {
+                    "author": "Alice",
+                    "keywords": [
+                        "made mistakes",
+                        "the restaurant was very quiet",
+                        "we were a bit surprised"
+                    ]
+                }
+            ],
+            "similarity": {
+                "word1": "Mistakes, but good food.",
+                "word2": "Chef Francisco, mistake-prone.",
+                "score": 0.5523
+            },
+            "decision": {
+                "author": "****",
+                "decision": ""
+            }
+        }
+    ],
+    "CodeGroups": [
+        {
+            "groupName": "Group1: Mediocre food and service",
+            "groupMembers": [
+                "Mediocre food, poor service"
+            ]
+        },
+        {
+            "groupName": "Group2: Good Food with Minor Setbacks",
+            "groupMembers": [
+                "Great food, beer, Smash.",
+                "Mistakes, but good food."
+            ]
+        },
+        {
+            "groupName": "Group3: Casual Dining Experience",
+            "groupMembers": [
+                "Basic self-serve restaurant",
+                "Delicious PatThai",
+                "Good pizza, nice staff.",
+                "Fresh sushi, friendly staff, quick service.",
+                "Chef Francisco, mistake-prone."
+            ]
+        }
+    ]
+}
