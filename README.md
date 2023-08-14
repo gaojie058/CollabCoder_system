@@ -8,7 +8,7 @@ We introduce **CollabCoder**, a system leveraging **Large Language Models (LLMs)
 
 - During the **code grouping phase**, CollabCoder employs a top-down approach for primary code group recommendations, reducing the cognitive burden of generating the final codebook.
 
-![image-20230814174227180](/Users/gaojie/Library/Application Support/typora-user-images/image-20230814174227180.png)
+![teaser.png](figure/teaser.png)
 
 ## Installation
 
