@@ -24,6 +24,7 @@ const generateOneSentenceSummary = async (sentence) => {
             .filter(summary => summary.trim() !== '')
             .map(summary => summary.replace(/^\d+\.\s*/, ''));
 
+        console.log(gptSummariesList)
         return gptSummariesList
     }
     catch (err) {
