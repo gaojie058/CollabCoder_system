@@ -52,7 +52,14 @@ const processRowsContentRes = (data, userName) => {
             defUncertainty = userCode[0].uncertainty
         }
 
-        let userKeywords = sentence.keywords.filter(element => element.author == userName).map(e => e.keywords)
+        let userKeywords = [];
+
+        if (sentence && sentence.keywords) {
+        userKeywords = sentence.keywords
+            .filter(element => element.author === userName)
+            .map(e => e.keywords || [])  // Fallback to an empty array if keywords is null or undefined
+            .flat();  // Flatten the array in case keywords itself is an array of arrays
+        }
 
         return {
             id: sentence.id,

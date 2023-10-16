@@ -43,4 +43,18 @@ const getResponseData = async (promptText) => {
   });
 }
 
-module.exports = getResponseData
+
+const main = async () => {
+  try {
+    const response111 = await getResponseData('hello');
+    console.log("GPT Response:", JSON.parse(response111));
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+main();
+
+
+
+//module.exports = getResponseData

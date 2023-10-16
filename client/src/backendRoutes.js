@@ -1,5 +1,5 @@
 // backend routings for frontend
-const baseUrl = "http://localhost:5000/"
+const baseUrl = "http://54.169.128.92:5000/"
 const backendRoutes = {
     DOCUMENT_URL: baseUrl + "document/",
     SUMMARY_URL: baseUrl + "summary/",
