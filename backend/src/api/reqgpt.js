@@ -1,60 +1,20 @@
-const https = require('https');
+const { Configuration, OpenAIApi } = require("openai");
 
-const options = {
-  hostname: 'api.openai.com',
-  path: '/v1/chat/completions',
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
-  }
-};
-
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
 
 const getResponseData = async (promptText) => {
-  const data = {
-    model: 'gpt-3.5-turbo',
-    messages: [{
-      role: 'user',
-      content: promptText
-    }]
-  };
-
-  return new Promise((resolve, reject) => {
-    const req = https.request(options, (res) => {
-      let responseData = '';
-
-      res.on('data', (chunk) => {
-        responseData += chunk;
-      });
-
-      res.on('end', () => {
-        resolve(responseData);
-      });
-    });
-
-    req.on('error', (error) => {
-      reject(error);
-    });
-
-    req.write(JSON.stringify(data));
-
-    req.end();
-  });
-}
-
-
-const main = async () => {
   try {
-    const response111 = await getResponseData('hello');
-    console.log("GPT Response:", JSON.parse(response111));
+    const completion = await openai.createChatCompletion({
+      model: "gpt-4-0613",
+      messages: [{role: "user", content: promptText}],
+    });
+    return completion.data.choices[0].message.content;
   } catch (error) {
     console.error("Error:", error);
   }
 };
 
-main();
-
-
-
-//module.exports = getResponseData
+module.exports = getResponseData;

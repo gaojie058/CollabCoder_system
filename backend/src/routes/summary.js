@@ -15,9 +15,8 @@ const generateOneSentenceSummary = async (sentence) => {
 
         let promptText = generateSummaryPrompt(sentence)
         // get GPT response from chatGPT api
-        const gptResponse = await gpt(promptText)
-        const gptResponseObject = JSON.parse(gptResponse);
-        const gptSummaries = gptResponseObject.choices[0].message.content;
+
+        const gptSummaries = await gpt(promptText)
 
         // get list without numbers
         const gptSummariesList = gptSummaries.split('\n')
@@ -49,9 +48,11 @@ const generateSimilarSummaries = async (sentence, currentCodesList) => {
         console.log("calling generateSimilarSummaries")
         let promptText = generateSimilarSummaryPrompt(sentence, currentCodesList)
         // get GPT response from chatGPT api
-        const gptResponse = await gpt(promptText)
-        const gptResponseObject = JSON.parse(gptResponse);
-        const gptSimilarCodes = gptResponseObject.choices[0].message.content;
+        // const gptResponse = await gpt(promptText)
+        // const gptResponseObject = JSON.parse(gptResponse);
+        // const gptSimilarCodes = gptResponseObject.choices[0].message.content;
+
+        const gptSimilarCodes = await gpt(promptText)
 
         // get list without numbers
         const gptSimilarCodesList = gptSimilarCodes.split('\n')
