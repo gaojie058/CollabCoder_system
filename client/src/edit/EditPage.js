@@ -60,7 +60,7 @@ const processRowsContentRes = (data, userName) => {
             .map(e => e.keywords || [])  // Fallback to an empty array if keywords is null or undefined
             .flat();  // Flatten the array in case keywords itself is an array of arrays
         }
-
+        
         return {
             id: sentence.id,
             interview_data: sentence.interview_data,
@@ -153,7 +153,7 @@ export default function EditPage() {
                 interviews = processRowsContentRes(result.data, userName)
                 savedCodeChoices = processCodebookRes(result.data, userName)
                 savedAutocomChoices = processAutocomChoices(result.data, userName)
-                console.log(interviews)
+                // console.log(interviews)
             }
             setCodebookChoices(savedCodeChoices)
             setRowsContent(interviews)
