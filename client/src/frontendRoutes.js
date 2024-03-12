@@ -9,7 +9,8 @@ const frontendRoutes = {
     ADD_PROJECT_URL: '/:userName/add_project',
     TEAM_URL: '/:owner/:project/team/:userName',
     PROFILE_URL: '/:userName/profile',
-    CODEBOOK_URL:'/:owner/:project/codebook/:userName',
+    CODEBOOK_URL: '/:owner/:project/codebook/:userName',
+
 }
 
 const createUrl = (urlTemp, userName) => {

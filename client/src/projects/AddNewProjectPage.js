@@ -47,7 +47,7 @@ const checkNoSameNameExist = async (tempProjName, userName) => {
 export default function AddNewProjectPage() {
 
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token')
 
     const { userName } = useParams()
 

@@ -14,7 +14,8 @@ import {
     InputAdornment,
     InputLabel,
     OutlinedInput,
-    Typography} from '@mui/material';
+    Typography
+} from '@mui/material';
 
 // third party
 import * as Yup from 'yup';
@@ -110,6 +111,7 @@ const FirebaseRegister = ({ ...others }) => {
                             setSubmitting(false);
                         }
                     }
+
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (

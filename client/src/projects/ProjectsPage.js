@@ -26,7 +26,7 @@ const addExample = (userName, navigate) => {
                 console.log(result)
             }
         })
-        .catch(console.log);
+        .catch(err => console.log(err));
 }
 export default function ProjectsPage() {
     const navigate = useNavigate();
@@ -47,7 +47,7 @@ export default function ProjectsPage() {
             const fetchData = async () => {
                 try {
                     setLoading(true);
-                    const result = await axios(PROJECTS_URL,);
+                    const result = await axios(PROJECTS_URL);
                     setProjects(result.data.sort((a, b) => (a.create_time > b.create_time) ? 1 : -1));
                     setLoading(false);
                 } catch (err) {

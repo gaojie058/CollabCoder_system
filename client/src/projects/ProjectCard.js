@@ -109,7 +109,7 @@ export default function ProjectCard(props) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => handleDialogClose(false, undefined)}>Cancel</Button>
+                    <Button onClick={() => handleDialogClose(false, project)}>Cancel</Button>
                     <Button onClick={() => handleDialogClose(true, project)} autoFocus>
                         Confirm
                     </Button>

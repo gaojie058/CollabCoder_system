@@ -55,12 +55,12 @@ const processRowsContentRes = (data, userName) => {
         let userKeywords = [];
 
         if (sentence && sentence.keywords) {
-        userKeywords = sentence.keywords
-            .filter(element => element.author === userName)
-            .map(e => e.keywords || [])  // Fallback to an empty array if keywords is null or undefined
-            .flat();  // Flatten the array in case keywords itself is an array of arrays
+            userKeywords = sentence.keywords
+                .filter(element => element.author === userName)
+                .map(e => e.keywords || [])  // Fallback to an empty array if keywords is null or undefined
+                .flat();  // Flatten the array in case keywords itself is an array of arrays
         }
-        
+
         return {
             id: sentence.id,
             interview_data: sentence.interview_data,
@@ -131,7 +131,7 @@ const updateKeywordsDb = async (method, rowId, keyword, owner, userName, project
 
 
 export default function EditPage() {
-    const token = JSON.parse(localStorage.getItem('token'));
+    const token = localStorage.getItem('token');
     const { owner, userName, project } = useParams()
 
     if (token && (token == userName)) {

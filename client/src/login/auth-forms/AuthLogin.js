@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 // material-ui
@@ -51,10 +51,7 @@ const AuthenticateLogin = ({ ...others }) => {
 
     const navigate = useNavigate()
 
-    const savedToken = localStorage.getItem('token');
-    if (savedToken) {
-        navigate(createProjectsUrl(savedToken))
-    } //todo: to check
+
 
     const { token, setToken } = useToken();
 
@@ -66,6 +63,13 @@ const AuthenticateLogin = ({ ...others }) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+    useEffect(() => {
+        const savedToken = localStorage.getItem('token');
+        if (savedToken) {
+            navigate(createProjectsUrl(savedToken))
+        }
+    })
 
     const handleSignIn = (values) => {
         axios({
@@ -79,11 +83,12 @@ const AuthenticateLogin = ({ ...others }) => {
             .then(res => {
                 if (res.data.message == "Success") {
                     let userName = res.data.user
-                    setToken(res.data.user)
+
+                    setToken(userName)
                     navigate(createProjectsUrl(userName))
                 } else {
                     alert(res.data.message)
-                } 
+                }
             })
             .catch(err => {
                 console.log(err)

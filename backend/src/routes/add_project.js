@@ -64,14 +64,23 @@ addprojectRouter.route('/example').post(async (req, res) => {
   let user_name = req.body.userName
   let project_name = req.body.projectName
 
+  const timeOptions = {
+    year: "2-digit",
+    month: "2-digit",
+    day: "2-digit"
+  }
+  const currentTime = new Date().toLocaleDateString("en-US", timeOptions);
+
   const fileData = fs.readFileSync('./src/routes/example.json', "utf-8");
-  let userReplaced = fileData.replaceAll("****", user_name)
-  let modifiedObj = JSON.parse(userReplaced)
+  let replaced = fileData.replaceAll("****", user_name).replaceAll("03/06/23", currentTime)
+  let modifiedObj = JSON.parse(replaced)
   modifiedObj.name = project_name
+
+
 
   insert(db_connect, "projects", [modifiedObj])
     .then(res.status(200).end())
-    .catch(console.log)
+    .catch(err => console.log(err))
 }
 );
 
