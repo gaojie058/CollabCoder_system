@@ -30,6 +30,7 @@ function EditToolbar() {
 export default function EditorTable(props) {
 
   const rows = props.rowsContent
+
   const options = props.options
 
   const { owner, project, userName } = useParams()
@@ -147,7 +148,7 @@ export default function EditorTable(props) {
       headerName: 'Definition',
       description: "To support your codes, identify relevant keywords or phrases from the raw data column, and add them as supporting evidence. ",
       renderCell: (params) => {
-        let keywords = params.row.keywords[0]
+        let keywords = params.row.keywords
         if (keywords && Array.isArray(keywords) && keywords.length > 0) {
           return <div>
             {keywords.map((item, index) => {

@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 function TextSelection(props) {
     const [selectedText, setSelectedText] = useState(null);
     const [menuVisible, setMenuVisible] = useState(false);
@@ -24,7 +24,10 @@ function TextSelection(props) {
                 handleSelection(event.nativeEvent.layerX, event.nativeEvent.layerY)
             }}
             onMouseLeave={() => setMenuVisible(false)}
-            onMouseDown={() => setMenuVisible(false)}
+            onClick={(e) => {
+                if (e.target.nodeName.toLowerCase() == 'p') setMenuVisible(false)
+                else return
+            }}
         >
             <p>
                 {props.interview_data.toString()}
@@ -34,9 +37,11 @@ function TextSelection(props) {
                     <ul>
                         <Button
                             variant='contained'
-                            onClick={() => {
+                            onClick={(e) => {
+                                e.stopPropagation()
                                 setMenuVisible(false)
                                 props.addKeyword(selectedText)
+
                             }}
                         >
                             Add as support

@@ -126,7 +126,7 @@ const updateKeywordsDb = async (method, rowId, keyword, owner, userName, project
         if (res.status == 200) {
             refresh()
         }
-    }).catch(console.log)
+    }).catch(err => console.log(err))
 }
 
 
@@ -145,6 +145,7 @@ export default function EditPage() {
         const refresh = async () => {
             console.log("refreshing...")
             let result = await axios(DOCUMENT_URL);
+            console.log(result);
             var interviews = []
             var savedCodeChoices = []
             var savedAutocomChoices = []
@@ -216,6 +217,7 @@ export default function EditPage() {
                                             updateOptions={(newChoices) => {
                                                 setAutocomChoices([...autocomChoices, newChoices].flat())
                                             }}
+                                            // updateKeyword={() => { console.log(1) }}
                                             updateKeyword={updateKeyword}
                                             removeKeyword={removeKeyword}
                                             currentCodesList={codebookChoices}
