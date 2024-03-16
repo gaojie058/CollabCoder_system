@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 function TextSelection(props) {
     const [selectedText, setSelectedText] = useState(null);
     const [menuVisible, setMenuVisible] = useState(false);
@@ -19,16 +19,18 @@ function TextSelection(props) {
 
     return (
         <div
-            onMouseUp={(event) => {
+            onContextMenu={(event) => {
+                event.preventDefault()
                 handleSelection(event.nativeEvent.layerX, event.nativeEvent.layerY)
             }}
-            onMouseLeave={() => { setMenuVisible(false) }}
+            onMouseLeave={() => setMenuVisible(false)}
+            onMouseDown={() => setMenuVisible(false)}
         >
             <p>
                 {props.interview_data.toString()}
             </p>
             {menuVisible && (
-                <div style={{ position: 'absolute', top: menuPosition.y, left: menuPosition.x, display: "block" }}>
+                <div style={{ position: 'absolute', top: menuPosition.y, left: menuPosition.x, display: "block" }} className='btn'>
                     <ul>
                         <Button
                             variant='contained'

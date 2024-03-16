@@ -1,5 +1,5 @@
 const express = require("express");
-var { query, insert } = require("../db/Utils")
+var { query, insert } = require("../db/Utils");
 
 const dbo = require("../db/Connection");
 

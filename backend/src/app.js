@@ -13,6 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
+
+
 app.use("/login", require("./routes/login"));
 app.use("/register", require("./routes/register"));
 
@@ -27,6 +29,8 @@ app.use("/users", require("./routes/users"));
 app.use("/summary", require("./routes/summary"));
 app.use("/decision", require("./routes/decision"));
 app.use("/codegroup", require("./routes/codegroup"));
+
+
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
