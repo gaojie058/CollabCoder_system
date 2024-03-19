@@ -79,8 +79,8 @@ addprojectRouter.route('/example').post(async (req, res) => {
 
 
   insert(db_connect, "projects", [modifiedObj])
-    .then(res.status(200).end())
-    .catch(err => console.log(err))
+    .then(res.json({ message: 'success' }))
+    .catch(err => res.send(err))
 }
 );
 
