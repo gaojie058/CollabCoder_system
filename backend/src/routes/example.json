@@ -24,13 +24,37 @@
                     "code": "Cheap but low quality food.",
                     "time": "19/03/2023, 23:45:50",
                     "uncertainty": 5,
-                    "code_source": "ChatGPT"
+                    "code_source": "ChatGPT",
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Cheap prices, mixed qualityand selection.",
+                            "Affordable, poor breakfast,great dessert.",
+                            "1970s decor, varied foodquality."
+                        ],
+                        "similarCodes": [
+                            "Affordable with mediocrefood and decor.",
+                            "Cheap but meh food.",
+                            "Good pizza, nice people,BOG0."
+                        ]
+                    }
                 },
                 {
                     "author": "Alice",
                     "code": "Cheap food, outdated decoration.",
                     "time": "13/03/2023, 10:14:16",
-                    "uncertainty": 4
+                    "uncertainty": 4,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Cheap prices, mixed qualityand selection.",
+                            "Affordable, poor breakfast,great dessert.",
+                            "1970s decor, varied foodquality."
+                        ],
+                        "similarCodes": [
+                            "Affordable with mediocrefood and decor.",
+                            "Cheap but meh food.",
+                            "Good pizza, nice people,BOG0."
+                        ]
+                    }
                 }
             ],
             "keywords": [
@@ -71,7 +95,19 @@
                     "code": "Cheap but meh food.",
                     "code_source": "****",
                     "time": "14/03/2023, 22:45:41",
-                    "uncertainty": 5
+                    "uncertainty": 5,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Poor burger set, averagepricey pizza.",
+                            "Unsatisfactory meal andservice, won't return.",
+                            "Dissatisfied with coldburger and pizza."
+                        ],
+                        "similarCodes": [
+                            "Cheap but meh food.",
+                            "Good pizza, nice people,BOG0.",
+                            "Mistakes, but good food."
+                        ]
+                    }
                 },
                 {
                     "author": "Alice",
@@ -194,13 +230,37 @@
                     "author": "****",
                     "code": "Great food, beer, Smash.",
                     "time": "08/03/2023, 09:11:56",
-                    "uncertainty": 5
+                    "uncertainty": 5,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Good beer, food , andgaming spot.",
+                            "Enjoyable locale withpleasant staff.",
+                            "Nostalgic Nintendonightlife in Northeast."
+                        ],
+                        "similarCodes": [
+                            "Great food, beer,Smash.",
+                            "Good pizza, nicepeople,BOGo.",
+                            "Limited restaurant."
+                        ]
+                    }
                 },
                 {
                     "author": "Alice",
                     "code": "Great food, beer, Smash.",
                     "time": "08/03/2023, 09:11:56",
-                    "uncertainty": 3
+                    "uncertainty": 3,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Good beer, food , andgaming spot.",
+                            "Enjoyable locale withpleasant staff.",
+                            "Nostalgic Nintendonightlife in Northeast."
+                        ],
+                        "similarCodes": [
+                            "Great food, beer,Smash.",
+                            "Good pizza, nicepeople,BOGo.",
+                            "Limited restaurant."
+                        ]
+                    }
                 }
             ],
             "keywords": [
@@ -240,13 +300,37 @@
                     "author": "****",
                     "code": "Creamy coconut soup, pat thai.",
                     "time": "08/03/2023, 12:00:18",
-                    "uncertainty": 5
+                    "uncertainty": 5,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Good beer, food , andgaming spot.",
+                            "Enjoyable locale withpleasant staff.",
+                            "Nostalgic Nintendonightlife in Northeast."
+                        ],
+                        "similarCodes": [
+                            "Great food, beer,Smash.",
+                            "Good pizza, nicepeople,BOGo.",
+                            "Limited restaurant."
+                        ]
+                    }
                 },
                 {
                     "author": "Alice",
                     "code": "Coconut Soup, Pat Thai, Yum!",
                     "time": "08/03/2023, 11:59:30",
-                    "uncertainty": 5
+                    "uncertainty": 5,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Good beer, food , andgaming spot.",
+                            "Enjoyable locale withpleasant staff.",
+                            "Nostalgic Nintendonightlife in Northeast."
+                        ],
+                        "similarCodes": [
+                            "Great food, beer,Smash.",
+                            "Good pizza, nicepeople,BOGo.",
+                            "Limited restaurant."
+                        ]
+                    }                    
                 }
             ],
             "keywords": [
@@ -285,7 +369,19 @@
                     "author": "****",
                     "code": "Good pizza, nice people, BOGO.",
                     "time": "06/03/2023, 16:03:00",
-                    "uncertainty": 5
+                    "uncertainty": 5,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Friendly staff, great deals,tasty pizza.",
+                            "Enjoyed pizza and wings,good offers.",
+                            "Excellent service, saucywings, will return."
+                        ],
+                        "similarCodes": [
+                            "Good pizza, nice people,BOGo.",
+                            "Affordable with mediocrefood and decor.",
+                            "Mistakes, but good food."
+                        ]
+                    }
                 },
                 {
                     "author": "Alice",
@@ -348,13 +444,37 @@
                     "author": "****",
                     "code": "Sushi Nara: Quick and Fresh.",
                     "time": "06/03/2023, 16:03:06",
-                    "uncertainty": 5
+                    "uncertainty": 5,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Affordable, delicious sushiat Sushi Nara",
+                            "Quick service, fresh sushivariety",
+                            "Impressed by sushi Nara'squality, pricing"
+                        ],
+                        "similarCodes": [
+                            "Affordable with mediocrefood and decor.",
+                            "Sushi Nara: Quick and Fresh.",
+                            "Great food, beer,Smash."
+                        ]
+                    }
                 },
                 {
                     "author": "Alice",
                     "code": "Friendly staff, quick service.",
                     "time": "06/03/2023, 16:04:02",
-                    "uncertainty":4
+                    "uncertainty":4,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Affordable, delicious sushiat Sushi Nara",
+                            "Quick service, fresh sushivariety",
+                            "Impressed by sushi Nara'squality, pricing"
+                        ],
+                        "similarCodes": [
+                            "Affordable with mediocrefood and decor.",
+                            "Sushi Nara: Quick and Fresh.",
+                            "Great food, beer,Smash."
+                        ]
+                    }
                 }
             ],
             "keywords": [
@@ -394,7 +514,19 @@
                     "author": "****",
                     "code": "Mistakes, but good food.",
                     "time": "06/03/2023, 16:03:12",
-                    "uncertainty": 5
+                    "uncertainty": 5,
+                    "codeSuggestion": {
+                        "gptsummary": [
+                            "Poor service, decent foodat hibachi",
+                            "Subpar experience at quiethibachi restaurant",
+                            "Disappointing serviceovershadows good hibachicooking"
+                        ],
+                        "similarCodes": [
+                            "8: Mistakes, but good food.",
+                            "3: Limited restaurant",
+                            "1:Affordable with mediocrefood and decor."
+                        ]
+                    }
                 },
                 {
                     "author": "Alice",
