@@ -60,7 +60,7 @@ function AicoderAppBar() {
       <Container maxWidth="l">
         <Toolbar disableGutters variant='regular'>
           <Logo variant={"white"} />
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="Medium"
               aria-label="account of current user"
@@ -98,8 +98,8 @@ function AicoderAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          </Box> */}
+          {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page.title}
@@ -112,9 +112,9 @@ function AicoderAppBar() {
                 {page.title}
               </Button>
             ))}
-          </Box>
+          </Box> */}
 
-          {token && <Box sx={{ flexGrow: 0 }}>
+          {/* {token && <Box sx={{ flexGrow: 0 }}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar {...stringAvatar(userName)} />
             </IconButton>
@@ -143,8 +143,8 @@ function AicoderAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>}
-          {!token && <Box sx={{ flexGrow: 0 }}>
+          </Box>} */}
+          {/* {!token && <Box sx={{ flexGrow: 0 }}>
             <Stack direction="row">
               <Button color='background' component='a' href={frontendRoutes.LOGIN_URL}>
                 Login
@@ -153,10 +153,10 @@ function AicoderAppBar() {
                 Register
               </Button>
             </Stack>
-          </Box>}
+          </Box>} */}
         </Toolbar>
       </Container>
-    </AppBar>
+    </AppBar >
   );
 }
 export default AicoderAppBar;

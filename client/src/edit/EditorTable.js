@@ -144,10 +144,10 @@ export default function EditorTable(props) {
     {
       field: 'keywords',
       flex: 0.7,
-      headerName: 'Definition',
+      headerName: 'Keywords support',
       description: "To support your codes, identify relevant keywords or phrases from the raw data column, and add them as supporting evidence. ",
       renderCell: (params) => {
-        let keywords = params.row.keywords[0]
+        let keywords = params.row.keywords
         if (keywords && Array.isArray(keywords) && keywords.length > 0) {
           return <div>
             {keywords.map((item, index) => {
@@ -204,72 +204,74 @@ export default function EditorTable(props) {
   ];
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        '& .actions': {
-          color: 'text.secondary',
-        },
-        '& .textPrimary': {
-          color: 'text.primary',
-        },
-        '& .one': {
-          backgroundColor: '#EFF2FA',
-          color: 'text.primary',
-        },
-        '& .two': {
-          backgroundColor: '#E0E4F5',
-          color: 'text.primary',
-        },
-        '& .three': {
-          backgroundColor: '#D0D7F0',
-          color: 'text.primary',
-        },
-        '& .four': {
-          backgroundColor: '#C0C9EB',
-          color: 'text.primary',
-        },
-        '& .five': {
-          backgroundColor: '#B1BCE7',
-          color: 'text.primary',
-        },
-        '& .six': {
-          backgroundColor: '#A1AEE2',
-          color: 'text.primary',
-        },
-        '& .seven': {
-          backgroundColor: '#91A1DD',
-          color: 'text.primary',
-        },
-      }}
-    >
-      <DataGrid
+    <>
+      <Box
         sx={{
-          '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': {
-            py: '5px',
+          width: '100%',
+          '& .actions': {
+            color: 'text.secondary',
           },
-          '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': {
-            py: '10px',
+          '& .textPrimary': {
+            color: 'text.primary',
           },
-          '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': {
-            py: '20px',
+          '& .one': {
+            backgroundColor: '#EFF2FA',
+            color: 'text.primary',
+          },
+          '& .two': {
+            backgroundColor: '#E0E4F5',
+            color: 'text.primary',
+          },
+          '& .three': {
+            backgroundColor: '#D0D7F0',
+            color: 'text.primary',
+          },
+          '& .four': {
+            backgroundColor: '#C0C9EB',
+            color: 'text.primary',
+          },
+          '& .five': {
+            backgroundColor: '#B1BCE7',
+            color: 'text.primary',
+          },
+          '& .six': {
+            backgroundColor: '#A1AEE2',
+            color: 'text.primary',
+          },
+          '& .seven': {
+            backgroundColor: '#91A1DD',
+            color: 'text.primary',
           },
         }}
-        rows={rows}
-        columns={columns}
-        pageSize={10}
-        autoHeight
-        disableSelectionOnClick
-        getRowHeight={() => 'auto'}
-        hideFooterSelectedRowCount
-        components={{
-          Toolbar: EditToolbar,
-        }}
-        experimentalFeatures={{ newEditingApi: true }}
-        onCellKeyDown={(params, event) => {
-          event.stopPropagation()
-        }}
-      />
-    </Box>
+      >
+        <DataGrid
+          sx={{
+            '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': {
+              py: '5px',
+            },
+            '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': {
+              py: '10px',
+            },
+            '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': {
+              py: '20px',
+            },
+          }}
+          rows={rows}
+          columns={columns}
+          pageSize={10}
+          autoHeight
+          disableSelectionOnClick
+          getRowHeight={() => 'auto'}
+          hideFooterSelectedRowCount
+          components={{
+            Toolbar: EditToolbar,
+          }}
+          experimentalFeatures={{ newEditingApi: true }}
+          onCellKeyDown={(params, event) => {
+            event.stopPropagation()
+          }}
+        />
+      </Box>
+    </>
   );
 }

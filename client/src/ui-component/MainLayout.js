@@ -12,7 +12,6 @@ const MainLayout = (props) => {
                 <AicoderAppBar />
                 {props.content}
             </Stack>
-
         </Box>
     );
 };

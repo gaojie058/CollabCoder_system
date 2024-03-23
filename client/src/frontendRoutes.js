@@ -1,5 +1,5 @@
 // frontend routings for frontend
-const baseUrl = "http://localhost:3000/"
+// const baseUrl = "http://localhost:3000/"
 const frontendRoutes = {
     REGISTER_URL: '/register',
     LOGIN_URL: '/login',

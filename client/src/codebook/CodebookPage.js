@@ -42,6 +42,7 @@ const processUniqueCodes = data => {
         }
     })
 
+
     return [decisionsList, decisionsDict];
 }
 
@@ -53,7 +54,7 @@ const isValidArray = (data) => {
 
 export default function CodebookPage() {
 
-    const token = JSON.parse(localStorage.getItem('token'));
+    const token = localStorage.getItem('token');
     const { owner, project, userName } = useParams()
 
     if (token && (token == userName)) {

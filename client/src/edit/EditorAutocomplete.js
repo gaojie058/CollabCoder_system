@@ -5,8 +5,10 @@ import backendRoutes from "../backendRoutes";
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import { styled, lighten, darken } from '@mui/system';
-import { Typography } from "@mui/material";
+import { Alert, Typography, AlertTitle, Collapse } from "@mui/material";
 import { Constants } from "../Constant";
+import myAlert from "../ui-component/Alert";
+
 
 const filter = createFilterOptions();
 
@@ -31,12 +33,18 @@ export default function EditorAutocomplete(props) {
   const [inputValue, setInputValue] = React.useState(props.inputValue);
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+
+  const [firstOpen, setFirstOpen] = React.useState(true)
+
   if (props.value != value) {
     setValue(props.value)
   }
 
   const sen_idx = props.id
+
+  // 获取自己的建议
   let options = props.options.filter(op => op.id == sen_idx)
+  // console.log(options);
 
   // since only ai and 1 iser, we use this
   const sortedOptions = [
@@ -53,6 +61,7 @@ export default function EditorAutocomplete(props) {
   const hasAiSum = options.filter(op1 => op1.author == Constants.OPEN_AI_MODEL).length > 0
   const currentCodesList = props.currentCodesList.map(op => op.code);
 
+  // console.log(props.rows);
 
   //return AI's results
   const summarizeSentence = async () => {
@@ -184,7 +193,19 @@ export default function EditorAutocomplete(props) {
         if (!hasAiSum) {
           summarizeSentence(value)
         }
-        setOpen(true);
+
+        if (firstOpen) {
+          // 第一次打开
+          setLoading(true)
+          myAlert('Loading', 'reading text first and wait for the GPT suggestions', 'info')
+          setTimeout(() => {
+            setLoading(false)
+            setFirstOpen(false)
+            setOpen(true)
+          }, 5000)
+        } else {
+          setOpen(true)
+        }
       }}
       onClose={() => {
         setOpen(false);

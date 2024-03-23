@@ -99,7 +99,7 @@ const calculateAgreementRate = (similarities) => {
 
 export default function ComparePage() {
 
-    const token = JSON.parse(localStorage.getItem('token'));
+    const token = localStorage.getItem('token');
     const { owner, project, userName } = useParams()
 
     if (token && (token == userName)) {

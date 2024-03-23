@@ -72,11 +72,14 @@ export const CodebookManager = memo(function Container({ uniqueCodesDict, rawCod
   let newlyAddedCodesDict = []
   let processedCodeGroups = []
   if (rawCodeGroups) {
+    // console.log(rawCodeGroups);
     newlyAddedCodesDict = getNewlyAddedCodesDict(rawCodeGroups, uniqueCodesDict)
     processedCodeGroups = processCodeGroups(rawCodeGroups, uniqueCodesDict)
   }
-  console.log(processedCodeGroups)
-  const [codeGroups, setCodeGroups] = useState(processedCodeGroups)
+
+  // console.log(processedCodeGroups)
+  // const [codeGroups, setCodeGroups] = useState(processedCodeGroups)
+  const [codeGroups, setCodeGroups] = useState([])
 
   // put these new codes into the code decision list in the right hand
   const [codeBoxes, setCodeBoxes] = useState(
@@ -87,6 +90,7 @@ export const CodebookManager = memo(function Container({ uniqueCodesDict, rawCod
       }, type: TypeCode
     }))
   )
+  // console.log(newlyAddedCodesDict);
 
   const [aiCreatingLoading, setAiCreatingLoading] = useState(false)
 
@@ -144,42 +148,56 @@ export const CodebookManager = memo(function Container({ uniqueCodesDict, rawCod
     setCodeBoxes(codeBoxes.concat(removed[0].droppedItems))
   }
 
-  const generateGroups = async () => {
+  const generateGroups = () => {
 
     const uniqueCodes = Object.keys(uniqueCodesDict);
 
     setAiCreatingLoading(true)
-    axios({
-      method: 'post',
-      url: backendRoutes.CODE_GROUP_URL,
-      data: {
-        codes: uniqueCodes,
-        owner: owner,
-        project_name: project,
-      }
-    })
-      .then(result => {
-        let newCodeGroups = result.data
-        let newDraggedCodeGroups = processCodeGroups(newCodeGroups, uniqueCodesDict)
+    // axios({
+    //   method: 'post',
+    //   url: backendRoutes.CODE_GROUP_URL,
+    //   data: {
+    //     codes: uniqueCodes,
+    //     owner: owner,
+    //     project_name: project,
+    //   }
+    // })
+    //   .then(result => {
+    //     let newCodeGroups = result.data
+    //     let newDraggedCodeGroups = processCodeGroups(newCodeGroups, uniqueCodesDict)
 
-        // set code group
-        setCodeGroups(newDraggedCodeGroups)
+    //     // set code group
+    //     setCodeGroups(newDraggedCodeGroups)
 
-        // set code boxes
-        let codeBoxItemsDict = getNewlyAddedCodesDict(newCodeGroups, uniqueCodesDict)
+    //     // set code boxes
+    //     let codeBoxItemsDict = getNewlyAddedCodesDict(newCodeGroups, uniqueCodesDict)
 
-        setCodeBoxes(Object.entries(codeBoxItemsDict).map(([code, interview_data]) => ({
-          name: {
-            code,
-            sentences: [interview_data],
-          }, type: TypeCode
-        })))
-        setAiCreatingLoading(false)
-      })
-      .catch(err => {
-        console.log(err)
-        setAiCreatingLoading(false)
-      });
+    //     setCodeBoxes(Object.entries(codeBoxItemsDict).map(([code, interview_data]) => ({
+    //       name: {
+    //         code,
+    //         sentences: [interview_data],
+    //       }, type: TypeCode
+    //     })))
+    //     setAiCreatingLoading(false)
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //     setAiCreatingLoading(false)
+    //   });
+
+
+    // 假请求
+    setTimeout(() => {
+      setAiCreatingLoading(false)
+      setCodeGroups(processedCodeGroups)
+      setCodeBoxes(Object.entries(newlyAddedCodesDict).map(([code, sentence]) => ({
+        name: {
+          code: code,
+          sentences: [sentence],
+        }, type: TypeCode
+      })))
+
+    }, 3000)
   }
 
   const saveGroupings = async () => {

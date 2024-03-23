@@ -131,7 +131,8 @@ const updateKeywordsDb = async (method, rowId, keyword, owner, userName, project
 
 
 export default function EditPage() {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
+    const token = 'Demouser'
     const { owner, userName, project } = useParams()
 
     if (token && (token == userName)) {
