@@ -45,12 +45,17 @@ const processCodeGroups = (generatedCodeGroups, uniqueCodesDict) => {
 // filter those codes that are not in the historial groups, 
 // these new codes will be listed in the right part
 // uniqueCodes = codes in rawCodeGroups + newlyAddedCodes
-const getNewlyAddedCodesDict = (rawCodeGroups, uniqueCodesDict) => {
+const getNewlyAddedCodesDict = (rawCodeGroups, uniqueCodesDict, type) => {
 
   let rawCodes = rawCodeGroups ? rawCodeGroups.map(it => it.groupMembers).flat() : []
   let uniqueCodes = Object.keys(uniqueCodesDict);
-  let newlyAddedCodes = uniqueCodes.filter(x => !rawCodes.includes(x))
+  let newlyAddedCodes
 
+  if (type === 1) {
+    newlyAddedCodes = uniqueCodes
+  } else {
+    newlyAddedCodes = uniqueCodes.filter(x => !rawCodes.includes(x))
+  }
   let newlyAddedCodesDict = {}
   if (newlyAddedCodes.length > 0) {
     for (let i = 0; i < newlyAddedCodes.length; i++) {
@@ -59,7 +64,6 @@ const getNewlyAddedCodesDict = (rawCodeGroups, uniqueCodesDict) => {
       newlyAddedCodesDict[newCode] = sentence;
     }
   }
-
   return newlyAddedCodesDict
 }
 
@@ -73,7 +77,7 @@ export const CodebookManager = memo(function Container({ uniqueCodesDict, rawCod
   let processedCodeGroups = []
   if (rawCodeGroups) {
     // console.log(rawCodeGroups);
-    newlyAddedCodesDict = getNewlyAddedCodesDict(rawCodeGroups, uniqueCodesDict)
+    newlyAddedCodesDict = getNewlyAddedCodesDict(rawCodeGroups, uniqueCodesDict, 1)
     processedCodeGroups = processCodeGroups(rawCodeGroups, uniqueCodesDict)
   }
 
@@ -190,7 +194,8 @@ export const CodebookManager = memo(function Container({ uniqueCodesDict, rawCod
     setTimeout(() => {
       setAiCreatingLoading(false)
       setCodeGroups(processedCodeGroups)
-      setCodeBoxes(Object.entries(newlyAddedCodesDict).map(([code, sentence]) => ({
+
+      setCodeBoxes(Object.entries(getNewlyAddedCodesDict(rawCodeGroups, uniqueCodesDict)).map(([code, sentence]) => ({
         name: {
           code: code,
           sentences: [sentence],

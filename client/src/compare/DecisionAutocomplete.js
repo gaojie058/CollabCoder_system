@@ -7,6 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { styled, lighten, darken } from '@mui/system';
 import { Typography } from "@mui/material";
 import { Constants } from "../Constant";
+import preData from './preData'
 
 const filter = createFilterOptions();
 
@@ -26,7 +27,7 @@ const GroupItems = styled('ul')({
 });
 
 const callGPT3 = async (code1, code2, interview_data) => {
-    console.log(`Making decision for "${code1}" and "${code2}" of "${interview_data}"...`)
+    // console.log(`Making decision for "${code1}" and "${code2}" of "${interview_data}"...`)
 
     const decision = await axios({
         method: 'post',
@@ -50,24 +51,28 @@ export default function DecisionAutocomplete(props) {
     const [options, setOptions] = React.useState([]);
 
     //return AI's results
-    const generateDecision = async () => {
+    const generateDecision = () => {
         console.log("Generating decisions...")
         //if we only input the project name and segmented_data id?
-        const row = props.row.row
-        const interview_data = row.interview_data
-        const code1 = row.codes[0].code
-        const code2 = row.codes[1].code
+        // const row = props.row.row
+        // const interview_data = row.interview_data
+        // const code1 = row.codes[0].code
+        // const code2 = row.codes[1].code
+        // setLoading(true)
+        // let decisions = await callGPT3(code1, code2, interview_data)
+        // let newDecisions = decisions.map(d => ({
+        //     id: row.id,
+        //     author: Constants.OPEN_AI_MODEL,
+        //     decision: d
+        // }))
         setLoading(true)
-        let decisions = await callGPT3(code1, code2, interview_data)
-        let newDecisions = decisions.map(d => ({
-            id: row.id,
-            author: Constants.OPEN_AI_MODEL,
-            decision: d
-        }))
-        props.updateOptions(newDecisions)
-        setOptions(newDecisions)
-        setLoading(false)
-        setOpen(true)
+        const newDecisions = preData[props.id]
+        setTimeout(() => {
+            props.updateOptions(newDecisions)
+            setOptions(newDecisions)
+            setLoading(false)
+            setOpen(true)
+        }, 3000)
     }
 
     return (
