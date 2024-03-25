@@ -145,7 +145,7 @@ export default function EditorTable(props) {
     {
       field: 'keywords',
       flex: 0.7,
-      headerName: 'Definition',
+      headerName: 'Keywords support',
       description: "To support your codes, identify relevant keywords or phrases from the raw data column, and add them as supporting evidence. ",
       renderCell: (params) => {
         let keywords = params.row.keywords

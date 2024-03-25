@@ -19,15 +19,19 @@ function TextSelection(props) {
 
     return (
         <div
-            onContextMenu={(event) => {
-                event.preventDefault()
+            // onContextMenu={(event) => {
+            //     event.preventDefault()
+            //     handleSelection(event.nativeEvent.layerX, event.nativeEvent.layerY)
+            // }}
+            // onMouseLeave={() => setMenuVisible(false)}
+            // onClick={(e) => {
+            //     if (e.target.nodeName.toLowerCase() == 'p') setMenuVisible(false)
+            //     else return
+            // }}
+            onMouseUp={(event) => {
                 handleSelection(event.nativeEvent.layerX, event.nativeEvent.layerY)
             }}
-            onMouseLeave={() => setMenuVisible(false)}
-            onClick={(e) => {
-                if (e.target.nodeName.toLowerCase() == 'p') setMenuVisible(false)
-                else return
-            }}
+            onMouseLeave={() => { setMenuVisible(false) }}
         >
             <p>
                 {props.interview_data.toString()}
