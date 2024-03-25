@@ -5,11 +5,6 @@ function TextSelection(props) {
     const [menuVisible, setMenuVisible] = useState(false);
     const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
 
-    // 判断左键是否按下
-    const [isMouseDown, setIsMouseDown] = useState(false)
-
-    // 判断是否长按
-    let longPressTimeout
 
     function handleSelection(x, y) {
         const selection = window.getSelection();
@@ -29,10 +24,6 @@ function TextSelection(props) {
                 handleSelection(event.nativeEvent.layerX, event.nativeEvent.layerY)
             }}
             onMouseLeave={() => { setMenuVisible(false) }}
-        // onClick={(e) => {
-        //     if (e.target.nodeName.toLowerCase() == 'p') setMenuVisible(false)
-        //     else return
-        // }}
         >
             <p>
                 {props.interview_data.toString()}

@@ -197,7 +197,7 @@ export default function EditorAutocomplete(props) {
         if (firstOpen) {
           // 第一次打开
           setLoading(true)
-          myAlert('Loading', 'reading text first and wait for the GPT suggestions', 'info')
+          myAlert('Loading', 'Reading the text first and waiting for GPT suggestions', 'info')
           setTimeout(() => {
             setLoading(false)
             setFirstOpen(false)
