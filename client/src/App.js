@@ -12,9 +12,30 @@ import { frontendRoutes } from './frontendRoutes.js';
 import LogoutPage from './login/pages/LogoutPage.js';
 import CodebookPage from './codebook/CodebookPage.js';
 import ComparePage from './compare/ComparePage.js';
+import { useEffect } from 'react'
+import useGetAutoLogin from './api/useGetAutoLogin.js';
+import useUserStore from './stores/useUserStore.js';
+
 
 export default function App() {
+  const setName = useUserStore((state) => state.setName)
+  const setStatus = useUserStore((state) => state.setStatus)
 
+
+  useEffect(() => {
+    const autoLogin = async () => {
+      // 检查是否已经登录
+      const { status, user } = await useGetAutoLogin()
+
+      // 如果已经登录，则更新状态
+      if (status) {
+        setName(user)
+        setStatus(true)
+      }
+    }
+
+    autoLogin()
+  }, [])
   return (
     <BrowserRouter>
       <Routes>

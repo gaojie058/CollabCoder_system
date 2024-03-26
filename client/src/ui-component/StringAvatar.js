@@ -1,4 +1,3 @@
-import * as React from 'react';
 
 function stringToColor(string) {
   let hash = 0;

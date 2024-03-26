@@ -30,7 +30,6 @@ import sha256 from 'crypto-js/sha256';
 import useScriptRef from '../../hooks/useScriptRef';
 import AnimateButton from '../../ui-component/extended/AnimateButton';
 import backendRoutes from '../../backendRoutes';
-import useToken from '../../hooks/useToekn';
 import useUserStore from '../../stores/useUserStore';
 
 // assets
@@ -49,12 +48,13 @@ const AuthenticateLogin = ({ ...others }) => {
 
     const theme = useTheme();
     const scriptedRef = useScriptRef();
-    // console.log(scriptedRef.current);
+
     const navigate = useNavigate()
 
+    // 设置 userStore的方法
     const setName = useUserStore((state) => state.setName)
-
-    const { token, setToken } = useToken();
+    const setToken = useUserStore((state) => state.setToken)
+    const setStatus = useUserStore((state) => state.setStatus)
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
@@ -106,7 +106,11 @@ const AuthenticateLogin = ({ ...others }) => {
             })
             if (result.data.message === 'Success') {
                 localStorage.setItem('token', result.data.token)
+
                 setName(result.data.user)
+                setToken(result.data.token)
+                setStatus(true)
+
                 navigate(createProjectsUrl(result.data.user))
             } else {
                 throw new Error(result.data.message)
@@ -138,18 +142,15 @@ const AuthenticateLogin = ({ ...others }) => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        if (scriptedRef.current) {
-                            handleSignIn(values)
-                            setStatus({ success: true });
-                            setSubmitting(false);
-                        }
+                        handleSignIn(values)
+                        setStatus({ success: true });
+                        setSubmitting(false);
                     } catch (err) {
                         alert(err)
-                        if (scriptedRef.current) {
-                            setStatus({ success: false });
-                            setErrors({ submit: err.message });
-                            setSubmitting(false);
-                        }
+                        setStatus({ success: false });
+                        setErrors({ submit: err.message });
+                        setSubmitting(false);
+
                     }
                 }}
             >

@@ -6,7 +6,7 @@ const secret = process.env.SECRET_KEY;
 
 module.exports = authenticate = (req, res, next) => {
     // 获取token
-    const token = req.headers.authorization;
+    const token = req.headers.authorization.split(' ')[1];
 
     // token不存在
     if (!token) {

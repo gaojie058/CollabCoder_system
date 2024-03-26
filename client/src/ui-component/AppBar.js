@@ -15,17 +15,20 @@ import { Stack } from '@mui/system';
 import Logo from './Logo';
 import { useNavigate } from "react-router-dom";
 import stringAvatar from './StringAvatar'
+import useUserStore from '../stores/useUserStore';
+
 
 
 function AicoderAppBar() {
   const token = localStorage.getItem('token')
 
   let settings
-  let userName
   let pages = []
 
+  const userName = useUserStore((state) => state.name)
+
   if (token) {
-    userName = token.replace("\"", "").replace("\"", "")
+    // userName = token.replace("\"", "").replace("\"", "")
     pages = [
       { title: 'Projects', url: createProjectsUrl(userName) },
       { title: 'Profile', url: createProfileUrl(userName) },

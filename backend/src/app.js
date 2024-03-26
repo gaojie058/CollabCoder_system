@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 // 不需要验证token的接口
 app.use("/login", require("./routes/login"));
 app.use("/register", require("./routes/register"));
+app.use("/autoLogin", require("./routes/autoLogin"));
 
 // 验证token的中间件
 // app.use(authenticate);

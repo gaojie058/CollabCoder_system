@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -9,12 +9,26 @@ import AuthWrapper1 from '../AuthWrapper1';
 import AuthCardWrapper from '../AuthCardWrapper';
 import AuthLogin from '../auth-forms/AuthLogin';
 import Logo from '../../ui-component/Logo';
+import { useNavigate } from 'react-router-dom';
+import useUserStore from '../../stores/useUserStore';
+import { createProjectsUrl } from '../../frontendRoutes';
 
 // ================================|| AUTH3 - LOGIN ||================================ //
 
 const Login = () => {
     const theme = useTheme();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
+
+    const status = useUserStore((state) => state.status)
+    const name = useUserStore((state) => state.name)
+
+    const navigate = useNavigate()
+    useEffect(() => {
+        //是否已经登录 是则跳转到主页
+        if (status) {
+            navigate(createProjectsUrl(name))
+        }
+    }, [status])
 
     return (
         <AuthWrapper1>

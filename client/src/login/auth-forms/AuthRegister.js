@@ -32,6 +32,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Stack } from '@mui/system';
 import { createProjectsUrl } from '../../frontendRoutes';
+import useUserStore from '../../stores/useUserStore';
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
@@ -42,6 +43,11 @@ const FirebaseRegister = ({ ...others }) => {
     const [show, setShow] = useState(false)
     const [showPassword, setShowPassword] = useState(false);
     const nameRegex = /^[A-Za-z0-9]+$/;
+
+    // 设置 userStore 的方法
+    const setName = useUserStore((state) => state.setName)
+    const setToken = useUserStore((state) => state.setToken)
+    const setStatus = useUserStore((state) => state.setStatus)
 
     const handleRegister = async (values) => {
         // axios({
@@ -78,6 +84,11 @@ const FirebaseRegister = ({ ...others }) => {
             if (result.data.status === 'success') {
                 // 如果注册成功
                 localStorage.setItem("token", result.data.token)
+
+                setName(values.user_name)
+                setToken(result.data.token)
+                setStatus(true)
+
                 navigate(createProjectsUrl(values.user_name))
             } else {
                 throw new Error(result.data.error)
