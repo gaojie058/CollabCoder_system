@@ -31,6 +31,7 @@ import useScriptRef from '../../hooks/useScriptRef';
 import AnimateButton from '../../ui-component/extended/AnimateButton';
 import backendRoutes from '../../backendRoutes';
 import useToken from '../../hooks/useToekn';
+import useUserStore from '../../stores/useUserStore';
 
 // assets
 import Visibility from '@mui/icons-material/Visibility';
@@ -48,10 +49,10 @@ const AuthenticateLogin = ({ ...others }) => {
 
     const theme = useTheme();
     const scriptedRef = useScriptRef();
-
+    // console.log(scriptedRef.current);
     const navigate = useNavigate()
 
-
+    const setName = useUserStore((state) => state.setName)
 
     const { token, setToken } = useToken();
 
@@ -64,35 +65,55 @@ const AuthenticateLogin = ({ ...others }) => {
         event.preventDefault();
     };
 
-    useEffect(() => {
-        const savedToken = localStorage.getItem('token');
-        if (savedToken) {
-            navigate(createProjectsUrl(savedToken))
-        }
-    })
+    // useEffect(() => {
+    //     // 实现自动登录
+    //     const savedToken = localStorage.getItem('token');
+    //     if (savedToken) {
+    //         navigate(createProjectsUrl(savedToken))
+    //     }
+    // })
 
-    const handleSignIn = (values) => {
-        axios({
-            method: 'post',
-            url: backendRoutes.LOGIN_URL,
-            data: {
-                email: values.email,
-                password: hash(values.password)
-            }
-        })
-            .then(res => {
-                if (res.data.message == "Success") {
-                    let userName = res.data.user
-
-                    setToken(userName)
-                    navigate(createProjectsUrl(userName))
-                } else {
-                    alert(res.data.message)
+    // 登录请求
+    const handleSignIn = async (values) => {
+        // axios({
+        //     method: 'post',
+        //     url: backendRoutes.LOGIN_URL,
+        //     data: {
+        //         email: values.email,
+        //         password: hash(values.password)
+        //     }
+        // })
+        //     .then(res => {
+        //         if (res.data.message == "Success") {
+        //             let userName = res.data.user
+        //             setToken(userName)
+        //             navigate(createProjectsUrl(userName))
+        //         } else {
+        //             alert(res.data.message)
+        //         }
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //     });
+        try {
+            const result = await axios({
+                method: 'post',
+                url: backendRoutes.LOGIN_URL,
+                data: {
+                    email: values.email,
+                    password: hash(values.password)
                 }
             })
-            .catch(err => {
-                console.log(err)
-            });
+            if (result.data.message === 'Success') {
+                localStorage.setItem('token', result.data.token)
+                setName(result.data.user)
+                navigate(createProjectsUrl(result.data.user))
+            } else {
+                throw new Error(result.data.message)
+            }
+        } catch (err) {
+            console.log(err)
+        }
     };
 
     return (
@@ -145,7 +166,7 @@ const AuthenticateLogin = ({ ...others }) => {
                                     name="email"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
-                                    label="Email Address / Username"
+                                    label="Email Address"
                                     inputProps={{}}
                                 />
                                 {touched.email && errors.email && (

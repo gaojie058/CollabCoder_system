@@ -30,8 +30,8 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "latest",
     "react-yup": "^1.24.1",
-    "redux": "^4.2.0",
-    "scikitjs": "^1.24.0"
+    "scikitjs": "^1.24.0",
+    "zustand": "^4.5.2"
   },
   "browserslist": {
     "production": [

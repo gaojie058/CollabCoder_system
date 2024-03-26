@@ -2,7 +2,9 @@ const express = require("express");
 const { createHash } = require('crypto');
 const dbo = require("../db/Connection");
 const { query, insert } = require("../db/Utils");
+const jwt = require("jsonwebtoken");
 
+console.log();
 function hash(string) {
   return createHash('sha256').update(string).digest('hex');
 }
@@ -32,7 +34,12 @@ registerRouter.post("/", function (req, res) {
             projects: [],
           }
           insert(myDb, collection, [user])
-            .then(() => { return res.json({ status: 'success' }) }
+            .then(() => {
+              // 生成token
+              const token = jwt.sign({ user_name: user.user_name }, process.env.SECRET_KEY, { expiresIn: '30days' });
+
+              return res.json({ status: 'success', token })
+            }
             )
             .catch(console.log)
         }
@@ -42,6 +49,7 @@ registerRouter.post("/", function (req, res) {
 });
 
 // todo: delete all codes of the user as well
+// 加权限控制
 registerRouter.route("/").delete(async function (req, res) {
   let filter = { user_name: req.body.user_name }
   const coll = dbo.getDb().collection(collection);

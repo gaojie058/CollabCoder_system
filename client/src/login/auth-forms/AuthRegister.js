@@ -39,30 +39,55 @@ const FirebaseRegister = ({ ...others }) => {
     const theme = useTheme();
     const scriptedRef = useScriptRef();
     const navigate = useNavigate()
+    const [show, setShow] = useState(false)
     const [showPassword, setShowPassword] = useState(false);
     const nameRegex = /^[A-Za-z0-9]+$/;
 
-    const handleRegister = (values) => {
-        axios({
-            method: 'post',
-            url: backendRoutes.REGISTER_URL,
-            data: {
-                user_name: values.user_name,
-                email: values.email,
-                password: values.password
-            }
-        })
-            .then(res => {
-                if (res.data.status == "error") {
-                    alert(res.data.error)
-                    localStorage.removeItem("token")
-                } else {
-                    navigate(createProjectsUrl(values.user_name))
+    const handleRegister = async (values) => {
+        // axios({
+        //     method: 'post',
+        //     url: backendRoutes.REGISTER_URL,
+        //     data: {
+        //         user_name: values.user_name,
+        //         email: values.email,
+        //         password: values.password
+        //     }
+        // })
+        //     .then(res => {
+        //         if (res.data.status == "error") {
+        //             alert(res.data.error)
+        //             localStorage.removeItem("token")
+        //         } else {
+        //             navigate(createProjectsUrl(values.user_name))
+        //         }
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //     });
+        try {
+            const result = await axios({
+                method: 'post',
+                url: backendRoutes.REGISTER_URL,
+                data: {
+                    user_name: values.user_name,
+                    email: values.email,
+                    password: values.password
                 }
             })
-            .catch(err => {
-                console.log(err)
-            });
+
+            if (result.data.status === 'success') {
+                // 如果注册成功
+                localStorage.setItem("token", result.data.token)
+                navigate(createProjectsUrl(values.user_name))
+            } else {
+                throw new Error(result.data.error)
+            }
+
+        }
+        catch (err) {
+            console.log(err);
+        }
+
     };
 
     const handleClickShowPassword = () => {
@@ -119,6 +144,7 @@ const FirebaseRegister = ({ ...others }) => {
                         <Stack spacing={2}>
                             <FormControl
                                 fullWidth
+                                variant='outlined'
                                 error={Boolean(touched.user_name && errors.user_name)}
                                 sx={{ ...theme.typography.customInput }}>
                                 <InputLabel htmlFor="outlined-adornment-user_name-register">Username</InputLabel>
@@ -131,6 +157,7 @@ const FirebaseRegister = ({ ...others }) => {
                                     onBlur={handleBlur}
                                     onChange={handleChange}
                                     inputProps={{}}
+                                    label="Username"
                                 />
                                 {touched.user_name && errors.user_name && (
                                     <FormHelperText error id="standard-weight-helper-text--register">
@@ -151,6 +178,7 @@ const FirebaseRegister = ({ ...others }) => {
                                     value={values.email}
                                     name="email"
                                     onBlur={handleBlur}
+                                    label="Email Address"
                                     onChange={handleChange}
                                     inputProps={{}}
                                 />
@@ -228,6 +256,7 @@ const FirebaseRegister = ({ ...others }) => {
                     </form>
                 )}
             </Formik>
+
         </>
     );
 };
