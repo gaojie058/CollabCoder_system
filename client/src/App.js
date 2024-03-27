@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import EditPage from './edit/EditPage.js'
@@ -15,12 +15,12 @@ import ComparePage from './compare/ComparePage.js';
 import { useEffect } from 'react'
 import useGetAutoLogin from './api/useGetAutoLogin.js';
 import useUserStore from './stores/useUserStore.js';
+import Loading from './ui-component/Loading.js';
 
 
 export default function App() {
   const setName = useUserStore((state) => state.setName)
   const setStatus = useUserStore((state) => state.setStatus)
-
 
   useEffect(() => {
     const autoLogin = async () => {
@@ -32,8 +32,8 @@ export default function App() {
         setName(user)
         setStatus(true)
       }
-    }
 
+    }
     autoLogin()
   }, [])
   return (

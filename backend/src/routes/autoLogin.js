@@ -4,7 +4,7 @@ const autoLoginRouter = express.Router();
 
 
 autoLoginRouter.get('/', (req, res) => {
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization?.split(' ')[1];
 
     if (token) {
         // 验证token是否有效

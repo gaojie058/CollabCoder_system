@@ -28,7 +28,7 @@ const Login = () => {
         if (status) {
             navigate(createProjectsUrl(name))
         }
-    }, [status])
+    })
 
     return (
         <AuthWrapper1>
