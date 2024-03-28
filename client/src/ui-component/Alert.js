@@ -10,7 +10,7 @@ import { createPortal } from "react-dom"
  * @param {string} message 必要值 alert的信息
  * @param {string} severity Alert组件的类型
  */
-export default function myAlert(title, message, severity) {
+export default function myAlert(title, message, severity, time) {
     function AlertComponent(props) {
         const [isShow, setIsShow] = useState(true)
         const StickyAlert = styled(Alert)({
@@ -23,7 +23,7 @@ export default function myAlert(title, message, severity) {
         useEffect(() => {
             setTimeout(() => {
                 setIsShow(false)
-            }, 5000)
+            }, time)
             return () => {
                 document.body.removeChild(container)
             }
