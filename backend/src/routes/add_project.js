@@ -55,7 +55,8 @@ addprojectRouter.route('/').post(async (req, res) => {
       }
     }).filter(data => data != undefined && data != null)
     insert(db_connect, "projects", [myobj])
-      .catch(console.log)
+      .then(res.json({ message: 'success' }))
+      .catch(res.json({ message: 'failed' }))
   }
 });
 

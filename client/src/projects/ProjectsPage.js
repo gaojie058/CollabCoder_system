@@ -9,6 +9,8 @@ import { createAddProjectUrl, createEditUrl } from "../frontendRoutes";
 import NoAccess from "../login/NoAccess";
 import Loading from "../ui-component/Loading";
 import useUserStore from "../stores/useUserStore";
+import useGetProjects from "../api/projects/useGetProjects";
+
 
 const addExample = (userName, navigate) => {
     let projectName = "ExampleProject-" + userName
@@ -43,14 +45,25 @@ export default function ProjectsPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                setLoading(true);
-                const result = await axios(PROJECTS_URL);
-                setProjects(result.data.sort((a, b) => (a.create_time > b.create_time) ? 1 : -1));
-                setLoading(false);
-            } catch (err) {
-                setLoading(false);
-                alert(err)
+            // try {
+            //     setLoading(true);
+            //     const result = await axios(PROJECTS_URL);
+            //     setProjects(result.data.sort((a, b) => (a.create_time > b.create_time) ? 1 : -1));
+            //     setLoading(false);
+            // } catch (err) {
+            //     setLoading(false);
+            //     alert(err)
+            // }
+            // 获取 projects
+            setLoading(true)
+            const { status, data } = await useGetProjects(userName)
+            if (status) {
+                setProjects(data.sort((a, b) => (a.create_time > b.create_time) ? 1 : -1))
+                setLoading(false)
+            } else {
+                setProjects(data.sort((a, b) => (a.create_time > b.create_time) ? 1 : -1))
+                setLoading(false)
+                console.log('Error fetching projects');
             }
         };
         fetchData();

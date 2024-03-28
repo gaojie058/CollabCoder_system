@@ -5,13 +5,18 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import axios from 'axios';
 import backendRoutes from "../backendRoutes";
 import { useNavigate, useParams } from "react-router-dom";
 import { createEditUrl } from "../frontendRoutes";
+import axios from "axios";
 import NoAccess from "../login/NoAccess";
 import useUserStore from "../stores/useUserStore";
 import FileInput from '../ui-component/input/FileInput'
+import useAddProject from "../api/projects/useAddProject";
+import useGetProjects from "../api/projects/useGetProjects";
+import useGetAllUsers from "../api/projects/useGetAllUsers";
+import myAlert from "../ui-component/Alert";
+
 
 function createProjectObj(name, owner, text, file_names, codingLevel, codersNames) {
     let coders = codersNames.map(name => (
@@ -37,13 +42,24 @@ function createProjectObj(name, owner, text, file_names, codingLevel, codersName
 }
 
 const checkNoSameNameExist = async (tempProjName, userName) => {
-    const PROJECTS_URL = backendRoutes.PROJECTS_URL + userName + "/"
-    const result = await axios(PROJECTS_URL);
-    if (result.data.map(p => p.name).includes(tempProjName)) {
-        return false
-    } else {
-        return true
+    // const PROJECTS_URL = backendRoutes.PROJECTS_URL + userName + "/"
+    // const result = await axios(PROJECTS_URL);
+    // console.log(result)
+    try {
+        const { status, data } = await useGetProjects(userName)
+        if (status) {
+            if (data.map(p => p.name).includes(tempProjName)) {
+                return false
+            } else {
+                return true
+            }
+        } else {
+            throw new Error("failed to get projects")
+        }
+    } catch (err) {
+        console.error(err);
     }
+
 }
 
 export default function AddNewProjectPage() {
@@ -62,11 +78,22 @@ export default function AddNewProjectPage() {
 
     useEffect(() => {
         const fetchData = async () => {
+            // try {
+            //     const result = await axios(backendRoutes.USERS_URL);
+            //     setAllUsers(result.data.filter((user) => (user.user_name != userName))) // remove myself
+            // } catch (err) {
+            //     alert(err)
+            // }
             try {
-                const result = await axios(backendRoutes.USERS_URL);
-                setAllUsers(result.data.filter((user) => (user.user_name != userName))) // remove myself
+                const { status, data } = await useGetAllUsers()
+                if (status) {
+                    setAllUsers(data.filter((user) => (user.user_name != userName)))
+                } else {
+                    setAllUsers(data.filter((user) => (user.user_name != userName)))
+                    throw new Error("failed to get all users")
+                }
             } catch (err) {
-                alert(err)
+                console.error(err);
             }
         };
         fetchData()
@@ -98,36 +125,47 @@ export default function AddNewProjectPage() {
     const handleConfirm = async () => {
 
         // concat all file text
-        let text = ""
-        const file_names = files[0].name
-        // let numOfFiles = localStorage.getItem("num_of_files")
-        for (let i = 0; i < files.length; i++) {
-            // text += localStorage.getItem(`file${i}`).toString()
-            const reader = new FileReader()
-            reader.onload = async (e) => {
-                text += e.target.result.toString()
+        if (files.length > 0) {
+            let text = ""
+            const file_names = files[0].name
+            // let numOfFiles = localStorage.getItem("num_of_files")
+            for (let i = 0; i < files.length; i++) {
+                // text += localStorage.getItem(`file${i}`).toString()
+                const reader = new FileReader()
+                reader.onload = async (e) => {
+                    text += e.target.result.toString()
+                }
+                reader.readAsText(files[i], 'utf-8')
             }
-        }
 
-        // send project object
-        let projectObj = createProjectObj(
-            projectName,
-            userName,
-            text,
-            // localStorage.getItem("file_names"),
-            file_names,
-            codingLevel,
-            coderValue.map((coder) => coder.user_name)
-        )
-        axios({
-            method: 'post',
-            url: backendRoutes.ADD_PROJECT_URL,
-            data: projectObj
-        })
-            .then(
-                navigate(createEditUrl(userName, projectName, userName))
+            // send project object
+            let projectObj = createProjectObj(
+                projectName,
+                userName,
+                text,
+                // localStorage.getItem("file_names"),
+                file_names,
+                codingLevel,
+                coderValue.map((coder) => coder.user_name)
             )
-            .catch(console.log);
+            // axios({
+            //     method: 'post',
+            //     url: backendRoutes.ADD_PROJECT_URL,
+            //     data: projectObj
+            // })
+            //     .then(
+            //         navigate(createEditUrl(userName, projectName, userName))
+            //     )
+            //     .catch(console.log);
+            const result = await useAddProject(projectObj)
+            if (result) {
+                navigate(createEditUrl(userName, projectName, userName))
+            } else {
+                console.log("failed create project");
+            }
+        } else {
+            myAlert('Error', 'please at least upload one file', 'error', 3000)
+        }
     };
 
 
@@ -148,12 +186,12 @@ export default function AddNewProjectPage() {
                                 id="name-input"
                                 variant="outlined"
                                 error={projectNameError}
-                                onBlur={event => {
-                                    if (checkNoSameNameExist(event.target.value, userName)) {
+                                onBlur={async (event) => {
+                                    if (await checkNoSameNameExist(event.target.value, userName)) {
                                         setProjectName(event.target.value)
                                         setProjectNameError(false)
                                     }
-                                    else { setProjectNameError(true) }
+                                    else { setProjectNameError(true); }
                                 }} />
                             <Divider />
 
