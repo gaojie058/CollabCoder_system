@@ -16,9 +16,10 @@ import backendRoutes from '../backendRoutes';
 
 export default function ProjectCard(props) {
     let project = props.project
-    let userName = props.user
+    let userName = props.userName
     let setProjects = props.setProjects //function
     let projects = props.projects
+
     const navigate = useNavigate()
 
     const [dialogOpen, setDialogOpen] = React.useState(false);

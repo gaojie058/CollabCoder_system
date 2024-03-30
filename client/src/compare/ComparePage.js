@@ -99,205 +99,205 @@ const calculateAgreementRate = (similarities) => {
 
 export default function ComparePage() {
 
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     const { owner, project, userName } = useParams()
 
-    if (token && (token == userName)) {
-        const PROJECT_URL = backendRoutes.PROJECT_URL + owner + "/" + project + "/"
 
-        const [loading, setLoading] = useState(true);
+    const PROJECT_URL = backendRoutes.PROJECT_URL + owner + "/" + project + "/"
 
-        const [currentProject, setCurrentProject] = useState({});
-        const [allProgress, setAllProgress] = useState([]);
-        const [coders, setCoders] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        const [checks, setChecks] = useState([true])
-        const [simiLoading, setSimiLoading] = useState(false)
-        const [similarities, setSimilarities] = useState([])
-        const [ck, setCK] = React.useState("Choose 2 coders to calculate.")
-        const [agreement, setAgreement] = React.useState("Choose 2 coders to calculate.")
-        const [autocomChoices, setAutocomChoices] = useState([]);
+    const [currentProject, setCurrentProject] = useState({});
+    const [allProgress, setAllProgress] = useState([]);
+    const [coders, setCoders] = useState([]);
 
-        const [checkedProgressCard, setCheckedProgressCard] = useState(true);
+    const [checks, setChecks] = useState([true])
+    const [simiLoading, setSimiLoading] = useState(false)
+    const [similarities, setSimilarities] = useState([])
+    const [ck, setCK] = React.useState("Choose 2 coders to calculate.")
+    const [agreement, setAgreement] = React.useState("Choose 2 coders to calculate.")
+    const [autocomChoices, setAutocomChoices] = useState([]);
 
-        const refresh = async () => {
-            console.log("refreshing...")
-            const result = await axios(PROJECT_URL);
-            let p = result.data[0]
-            setCurrentProject(p)
-            setAutocomChoices(processAutocomChoices(p.segmented_data))
-            setChecks(checks.concat(Array(p.coders.length - 1).fill(false)))
-            let tempSimilarities = processSimilarities(p.segmented_data)
-            setSimilarities(tempSimilarities)
-            setAllProgress(result.data[1])
-            setCoders(swapUser(p, userName))
+    const [checkedProgressCard, setCheckedProgressCard] = useState(true);
+
+    const refresh = async () => {
+        console.log("refreshing...")
+        const result = await axios(PROJECT_URL);
+        let p = result.data[0]
+        setCurrentProject(p)
+        setAutocomChoices(processAutocomChoices(p.segmented_data))
+        setChecks(checks.concat(Array(p.coders.length - 1).fill(false)))
+        let tempSimilarities = processSimilarities(p.segmented_data)
+        setSimilarities(tempSimilarities)
+        setAllProgress(result.data[1])
+        setCoders(swapUser(p, userName))
+        setAgreement(calculateAgreementRate(tempSimilarities))
+    }
+
+    const fetchData = async () => {
+        try {
+            await refresh()
+            setLoading(false);
+        } catch (err) {
+            setLoading(false);
+            alert(err)
+        }
+    };
+
+    useEffect(() => {
+        setLoading(true);
+        fetchData()
+        setTimeout(() => {
+            fetchData()
+        }, 500)
+    }, []);
+
+    const cacheCalcedSimilarities = async (scoredict) => {
+
+        const result = await axios({
+            method: 'put',
+            url: backendRoutes.SIMILARITY_URL,
+            data: {
+                scoredict: scoredict,
+            }
+        })
+    }
+
+    const calcTwoCodersSimilarity = async (segmented_data, coder0, coder1) => {
+        console.log("calcTwoCodersSimilarity called")
+        setSimiLoading(true)
+        const scores = await axios({
+            method: 'post',
+            url: backendRoutes.SIMILARITY_URL,
+            data: {
+                coder0: coder0,
+                coder1: coder1,
+                segmented_data: segmented_data,
+                project_name: project,
+                owner: owner,
+            }
+        })
+        if (scores.status == 200) {
+            let tempSimilarities = processScoresResponse(scores)
+            setSimilarities(tempSimilarities);
+            setSimiLoading(false)
+            cacheCalcedSimilarities(sortScoreData(scores))
             setAgreement(calculateAgreementRate(tempSimilarities))
         }
+    }
 
-        const fetchData = async () => {
-            try {
-                await refresh()
-                setLoading(false);
-            } catch (err) {
-                setLoading(false);
-                alert(err)
-            }
-        };
-
-        useEffect(() => {
-            setLoading(true);
-            fetchData()
-            setTimeout(() => {
-                fetchData()
-            }, 500)
-        }, []);
-
-        const cacheCalcedSimilarities = async (scoredict) => {
-
-            const result = await axios({
-                method: 'put',
-                url: backendRoutes.SIMILARITY_URL,
-                data: {
-                    scoredict: scoredict,
+    const calcStats = (coders, segmented_data, checksList) => {
+        // check 2 coders
+        console.log("Calculating stats...")
+        if (checksList.filter(v => v == true).length == 2) {
+            // filter coders
+            const compareCoders = []
+            checksList.forEach((element, index) => {
+                if (element) {
+                    compareCoders.push(coders[index])
                 }
-            })
+            });
+            // calc simi
+            calcTwoCodersSimilarity(segmented_data, compareCoders[0], compareCoders[1])
+            // calc ck
+            let codeList1 = cKCodeFiltering(segmented_data, compareCoders[0])
+            let codeList2 = cKCodeFiltering(segmented_data, compareCoders[1])
+            calcCohenKappa(codeList1, codeList2, setCK)
+        } else {
+            alert("Please choose exactly 2 coders to compare.")
         }
 
-        const calcTwoCodersSimilarity = async (segmented_data, coder0, coder1) => {
-            console.log("calcTwoCodersSimilarity called")
-            setSimiLoading(true)
-            const scores = await axios({
-                method: 'post',
-                url: backendRoutes.SIMILARITY_URL,
-                data: {
-                    coder0: coder0,
-                    coder1: coder1,
-                    segmented_data: segmented_data,
-                    project_name: project,
-                    owner: owner,
-                }
-            })
-            if (scores.status == 200) {
-                let tempSimilarities = processScoresResponse(scores)
-                setSimilarities(tempSimilarities);
-                setSimiLoading(false)
-                cacheCalcedSimilarities(sortScoreData(scores))
-                setAgreement(calculateAgreementRate(tempSimilarities))
-            }
+    }
+
+    const handleChecksChange = (coder_index, checked) => {
+        let newChecks = checks.slice()
+        let userFinished = allProgress[userName] == 100
+        let toCheckFinished = allProgress[coders[coder_index]] == 100
+        if ((userFinished && toCheckFinished) || coder_index == 0) {
+            newChecks[coder_index] = checked
+            setChecks(newChecks)
+        } else {
+            if (!userFinished) alert("You haven't finished adding codes yet. Thus you are not allowed to view others codes.")
+            else if (!toCheckFinished) alert("The user you want to compare with hasn't finished adding codes yet. Thus you are not allowed to view their codes.")
         }
+    }
 
-        const calcStats = (coders, segmented_data, checksList) => {
-            // check 2 coders
-            console.log("Calculating stats...")
-            if (checksList.filter(v => v == true).length == 2) {
-                // filter coders
-                const compareCoders = []
-                checksList.forEach((element, index) => {
-                    if (element) {
-                        compareCoders.push(coders[index])
-                    }
-                });
-                // calc simi
-                calcTwoCodersSimilarity(segmented_data, compareCoders[0], compareCoders[1])
-                // calc ck
-                let codeList1 = cKCodeFiltering(segmented_data, compareCoders[0])
-                let codeList2 = cKCodeFiltering(segmented_data, compareCoders[1])
-                calcCohenKappa(codeList1, codeList2, setCK)
-            } else {
-                alert("Please choose exactly 2 coders to compare.")
-            }
+    return (
+        <div>
+            {loading && <Loading />}
+            {!loading &&
 
-        }
-
-        const handleChecksChange = (coder_index, checked) => {
-            let newChecks = checks.slice()
-            let userFinished = allProgress[userName] == 100
-            let toCheckFinished = allProgress[coders[coder_index]] == 100
-            if ((userFinished && toCheckFinished) || coder_index == 0) {
-                newChecks[coder_index] = checked
-                setChecks(newChecks)
-            } else {
-                if (!userFinished) alert("You haven't finished adding codes yet. Thus you are not allowed to view others codes.")
-                else if (!toCheckFinished) alert("The user you want to compare with hasn't finished adding codes yet. Thus you are not allowed to view their codes.")
-            }
-        }
-
-        return (
-            <div>
-                {loading && <Loading />}
-                {!loading &&
-
-                    <Box sx={{ width: 1, pt: 2 }}>
-                        <Grid container direction="row" justifyContent="left" spacing={2} columns={10} sx={{ bgcolor: 'surface_variant.main' }}>
-                            <Grid item xs={10} >
-                                <Stack spacing={2} sx={{ p: 2, pl: 4 }} >
-                                    <Typography variant="h2" >
-                                        {project}
-                                    </Typography>
-                                    <CompareTab owner={owner} project={project} userName={userName} />
-                                </Stack>
-                            </Grid>
-
+                <Box sx={{ width: 1, pt: 2 }}>
+                    <Grid container direction="row" justifyContent="left" spacing={2} columns={10} sx={{ bgcolor: 'surface_variant.main' }}>
+                        <Grid item xs={10} >
+                            <Stack spacing={2} sx={{ p: 2, pl: 4 }} >
+                                <Typography variant="h2" >
+                                    {project}
+                                </Typography>
+                                <CompareTab owner={owner} project={project} userName={userName} />
+                            </Stack>
                         </Grid>
 
-                        <Box sx={{ p: 3, width: 1 }}>
-                            <Grid container direction="row" justifyContent="center" spacing={2} columns={10}>
+                    </Grid>
 
-                                <Grid item xs={10}>
-                                    <CompareTable
-                                        coders={coders}
-                                        segmented_data={currentProject.segmented_data}
-                                        checks={checks}
-                                        similarities={similarities}
-                                        options={autocomChoices}
-                                        refresh={refresh}
-                                        updateOptions={(newChoices) => {
-                                            setAutocomChoices([...autocomChoices, newChoices].flat())
-                                        }}
-                                        calcStats={() => { calcStats(coders, currentProject.segmented_data, checks) }}
-                                        simiLoading={simiLoading}
-                                    />
-                                </Grid>
+                    <Box sx={{ p: 3, width: 1 }}>
+                        <Grid container direction="row" justifyContent="center" spacing={2} columns={10}>
+
+                            <Grid item xs={10}>
+                                <CompareTable
+                                    coders={coders}
+                                    segmented_data={currentProject.segmented_data}
+                                    checks={checks}
+                                    similarities={similarities}
+                                    options={autocomChoices}
+                                    refresh={refresh}
+                                    updateOptions={(newChoices) => {
+                                        setAutocomChoices([...autocomChoices, newChoices].flat())
+                                    }}
+                                    calcStats={() => { calcStats(coders, currentProject.segmented_data, checks) }}
+                                    simiLoading={simiLoading}
+                                />
                             </Grid>
-                        </Box>
-                        <Box
-                            sx={{
-                                borderRadius: 0,
-                                position: 'fixed',
-                                right: 10,
-                                bottom: 10,
-                                bgcolor: "primary_container.main"
-                            }}
+                        </Grid>
+                    </Box>
+                    <Box
+                        sx={{
+                            borderRadius: 0,
+                            position: 'fixed',
+                            right: 10,
+                            bottom: 10,
+                            bgcolor: "primary_container.main"
+                        }}
+                    >
+                        <Button
+                            sx={{ width: 1, justifyContent: "left" }}
+                            onClick={() => { setCheckedProgressCard(!checkedProgressCard) }}
+                            startIcon={checkedProgressCard ? <ArrowDropDownIcon /> : <ArrowDropUpIcon />}
                         >
-                            <Button
-                                sx={{ width: 1, justifyContent: "left" }}
-                                onClick={() => { setCheckedProgressCard(!checkedProgressCard) }}
-                                startIcon={checkedProgressCard ? <ArrowDropDownIcon /> : <ArrowDropUpIcon />}
-                            >
-                                Statistics
-                            </Button>
-                            <Collapse
-                                orientation="vertical"
-                                in={checkedProgressCard}
-                            >
-                                <Box sx={{ p: 2 }}>
-                                    <ProgressList
-                                        file_names={currentProject.file_names}
-                                        coders={coders}
-                                        progressList={allProgress}
-                                        checks={checks}
-                                        handleChecksChange={handleChecksChange}
-                                        ck={ck}
-                                        agreement={agreement}
-                                    />
-                                </Box>
+                            Statistics
+                        </Button>
+                        <Collapse
+                            orientation="vertical"
+                            in={checkedProgressCard}
+                        >
+                            <Box sx={{ p: 2 }}>
+                                <ProgressList
+                                    file_names={currentProject.file_names}
+                                    coders={coders}
+                                    progressList={allProgress}
+                                    checks={checks}
+                                    handleChecksChange={handleChecksChange}
+                                    ck={ck}
+                                    agreement={agreement}
+                                />
+                            </Box>
 
-                            </Collapse>
-                        </Box>
-                    </Box >
-                }
-            </div >
-        )
+                        </Collapse>
+                    </Box>
+                </Box >
+            }
+        </div >
+    )
 
-    } else { return <NoAccess /> }
+
 }

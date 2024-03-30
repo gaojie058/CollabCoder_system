@@ -11,6 +11,7 @@ import Loading from "../ui-component/Loading";
 import { Stack } from "@mui/system";
 import { EditTab } from "../ui-component/ProjectTabs";
 import { Constants } from "../Constant";
+import useUserStore from "../stores/useUserStore";
 
 const TABLE_HEIGHT = 3000
 const isValidArray = (data) => {
@@ -131,116 +132,117 @@ const updateKeywordsDb = async (method, rowId, keyword, owner, userName, project
 
 
 export default function EditPage() {
-    const token = localStorage.getItem('token');
-    const { owner, userName, project } = useParams()
+    // const token = localStorage.getItem('token');
+    const { owner, project, userName } = useParams()
+    // const userName = useUserStore((state) => state.name)
 
-    if (token && (token == userName)) {
-        const DOCUMENT_URL = backendRoutes.DOCUMENT_URL + project + "/"
-        const [loading, setLoading] = useState(true);
 
-        const [rowsContent, setRowsContent] = useState([]);
-        const [codebookChoices, setCodebookChoices] = useState([]);
-        const [autocomChoices, setAutocomChoices] = useState([]);
+    const DOCUMENT_URL = backendRoutes.DOCUMENT_URL + project + "/"
+    const [loading, setLoading] = useState(true);
 
-        const refresh = async () => {
-            console.log("refreshing...")
-            let result = await axios(DOCUMENT_URL);
-            console.log(result);
-            var interviews = []
-            var savedCodeChoices = []
-            var savedAutocomChoices = []
-            if (isValidArray(result.data)) {
+    const [rowsContent, setRowsContent] = useState([]);
+    const [codebookChoices, setCodebookChoices] = useState([]);
+    const [autocomChoices, setAutocomChoices] = useState([]);
 
-                interviews = processRowsContentRes(result.data, userName)
-                savedCodeChoices = processCodebookRes(result.data, userName)
-                savedAutocomChoices = processAutocomChoices(result.data, userName)
-                // console.log(interviews)
-            }
-            setCodebookChoices(savedCodeChoices)
-            setRowsContent(interviews)
-            setAutocomChoices(savedAutocomChoices)
+    const refresh = async () => {
+        console.log("refreshing...")
+        let result = await axios(DOCUMENT_URL);
+        // console.log(result);
+        var interviews = []
+        var savedCodeChoices = []
+        var savedAutocomChoices = []
+        if (isValidArray(result.data)) {
+
+            interviews = processRowsContentRes(result.data, userName)
+            savedCodeChoices = processCodebookRes(result.data, userName)
+            savedAutocomChoices = processAutocomChoices(result.data, userName)
+            // console.log(interviews)
         }
+        setCodebookChoices(savedCodeChoices)
+        setRowsContent(interviews)
+        setAutocomChoices(savedAutocomChoices)
+    }
 
-        const fetchData = async () => {
-            try {
-                refresh()
-                setLoading(false);
-            } catch (err) {
-                setLoading(false);
-                alert(err)
-            }
-        };
-
-        useEffect(() => {
-            setLoading(true);
-            fetchData()
-            setTimeout(() => {
-                fetchData()
-            }, 1000)
-        }, []);
-
-        const updateKeyword = (rowId, keyword) => {
-            updateKeywordsDb("post", rowId, keyword, owner, userName, project, refresh)
+    const fetchData = async () => {
+        try {
+            refresh()
+            setLoading(false);
+        } catch (err) {
+            setLoading(false);
+            alert(err)
         }
+    };
 
-        const removeKeyword = (rowId, keyword) => {
-            updateKeywordsDb("delete", rowId, keyword, owner, userName, project, refresh)
-        }
+    useEffect(() => {
+        setLoading(true);
+        fetchData()
+        // setTimeout(() => {
+        //     fetchData()
+        // }, 1000)
+    }, []);
 
-        return (
-            <div>
-                {loading && <Loading />}
-                {!loading &&
-                    <Box sx={{ width: 1, pt: 1.5 }}>
-                        <Grid container direction="row" justifyContent="left" spacing={2} columns={10} sx={{ bgcolor: 'surface_variant.main' }}>
-                            <Grid item xs={10} >
-                                <Stack spacing={2} sx={{ p: 2, pl: 4 }} >
-                                    <Typography variant="h2" >
-                                        {project}
+    const updateKeyword = (rowId, keyword) => {
+        updateKeywordsDb("post", rowId, keyword, owner, userName, project, refresh)
+    }
+
+    const removeKeyword = (rowId, keyword) => {
+        updateKeywordsDb("delete", rowId, keyword, owner, userName, project, refresh)
+    }
+
+    return (
+        <div>
+            {loading && <Loading />}
+            {!loading &&
+                <Box sx={{ width: 1, pt: 1.5 }}>
+                    <Grid container direction="row" justifyContent="left" spacing={2} columns={10} sx={{ bgcolor: 'surface_variant.main' }}>
+                        <Grid item xs={10} >
+                            <Stack spacing={2} sx={{ p: 2, pl: 4 }} >
+                                <Typography variant="h2" >
+                                    {project}
+                                </Typography>
+                                <EditTab owner={owner} project={project} userName={userName} />
+                            </Stack>
+                        </Grid>
+                    </Grid>
+                    <Box sx={{ p: 3, width: 1 }}>
+                        <Grid container direction="row" justifyContent="left" spacing={2} columns={10}>
+                            <Grid item xs={7}>
+                                <Stack >
+                                    <Typography variant="h3" >
+                                        Editor
                                     </Typography>
-                                    <EditTab owner={owner} project={project} userName={userName} />
+                                    <EditorTable
+                                        rowsContent={rowsContent}
+                                        options={autocomChoices}
+                                        refresh={refresh}
+                                        table_height={TABLE_HEIGHT}
+                                        updateOptions={(newChoices) => {
+                                            setAutocomChoices([...autocomChoices, newChoices].flat())
+                                        }}
+                                        // updateKeyword={() => { console.log(1) }}
+                                        updateKeyword={updateKeyword}
+                                        removeKeyword={removeKeyword}
+                                        currentCodesList={codebookChoices}
+                                    />
+                                </Stack>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <Stack >
+                                    <Typography variant="h3" >
+                                        Codebook
+                                    </Typography>
+                                    <CodebookTable
+                                        options={codebookChoices}
+                                        refresh={refresh}
+                                        table_height={TABLE_HEIGHT}
+                                    />
                                 </Stack>
                             </Grid>
                         </Grid>
-                        <Box sx={{ p: 3, width: 1 }}>
-                            <Grid container direction="row" justifyContent="left" spacing={2} columns={10}>
-                                <Grid item xs={7}>
-                                    <Stack >
-                                        <Typography variant="h3" >
-                                            Editor
-                                        </Typography>
-                                        <EditorTable
-                                            rowsContent={rowsContent}
-                                            options={autocomChoices}
-                                            refresh={refresh}
-                                            table_height={TABLE_HEIGHT}
-                                            updateOptions={(newChoices) => {
-                                                setAutocomChoices([...autocomChoices, newChoices].flat())
-                                            }}
-                                            // updateKeyword={() => { console.log(1) }}
-                                            updateKeyword={updateKeyword}
-                                            removeKeyword={removeKeyword}
-                                            currentCodesList={codebookChoices}
-                                        />
-                                    </Stack>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <Stack >
-                                        <Typography variant="h3" >
-                                            Codebook
-                                        </Typography>
-                                        <CodebookTable
-                                            options={codebookChoices}
-                                            refresh={refresh}
-                                            table_height={TABLE_HEIGHT}
-                                        />
-                                    </Stack>
-                                </Grid>
-                            </Grid>
-                        </Box>
-                    </Box >
-                }
-            </div>
-        )
-    } else { return <NoAccess /> }
+                    </Box>
+                </Box >
+            }
+        </div>
+    )
+
 }

@@ -56,66 +56,65 @@ export default function CodebookPage() {
     const token = localStorage.getItem('token');
     const { owner, project, userName } = useParams()
 
-    if (token && (token == userName)) {
-        const PROJECT_URL = backendRoutes.PROJECT_URL + owner + "/" + project + "/"
 
-        const [loading, setLoading] = useState(true);
-        const [codeGroups, setCodeGroups] = useState([]);
-        const [uniqueCodesDict, setUniqueCodesDict] = useState([]);
-        const [coders, setCoders] = useState([]);
+    const PROJECT_URL = backendRoutes.PROJECT_URL + owner + "/" + project + "/"
 
-        useEffect(() => {
-            const fetchData = async () => {
-                try {
-                    setLoading(true);
-                    let result = await axios(PROJECT_URL, { method: "get" });
-                    if (isValidArray(result.data)) {
-                        let project = result.data[0]
-                        setCoders(project.coders)
-                        const [_, uniqueCodesDict] = processUniqueCodes(project.segmented_data);
-                        project.CodeGroups ? setCodeGroups(project.CodeGroups) : null;
+    const [loading, setLoading] = useState(true);
+    const [codeGroups, setCodeGroups] = useState([]);
+    const [uniqueCodesDict, setUniqueCodesDict] = useState([]);
+    const [coders, setCoders] = useState([]);
 
-                        setUniqueCodesDict(uniqueCodesDict)
-                        setLoading(false);
-                    }
-                } catch (err) {
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setLoading(true);
+                let result = await axios(PROJECT_URL, { method: "get" });
+                if (isValidArray(result.data)) {
+                    let project = result.data[0]
+                    setCoders(project.coders)
+                    const [_, uniqueCodesDict] = processUniqueCodes(project.segmented_data);
+                    project.CodeGroups ? setCodeGroups(project.CodeGroups) : null;
+
+                    setUniqueCodesDict(uniqueCodesDict)
                     setLoading(false);
-                    console.log(err)
                 }
-            };
-            fetchData()
-        }, []);
+            } catch (err) {
+                setLoading(false);
+                console.log(err)
+            }
+        };
+        fetchData()
+    }, []);
 
-        return (
-            <div>
-                {loading && <Loading />}
-                {!loading &&
-                    <Box sx={{ width: 1, pt: 2 }}>
-                        <Grid container direction="row" justifyContent="left" spacing={2} columns={10} sx={{ bgcolor: 'surface_variant.main' }}>
-                            <Grid item xs={10} >
-                                <Stack spacing={2} sx={{ p: 2, pl: 4 }} >
-                                    <Typography variant="h2" >
-                                        {project}
-                                    </Typography>
-                                    <CodebookTab owner={owner} project={project} userName={userName} />
-                                </Stack>
-                            </Grid>
+    return (
+        <div>
+            {loading && <Loading />}
+            {!loading &&
+                <Box sx={{ width: 1, pt: 2 }}>
+                    <Grid container direction="row" justifyContent="left" spacing={2} columns={10} sx={{ bgcolor: 'surface_variant.main' }}>
+                        <Grid item xs={10} >
+                            <Stack spacing={2} sx={{ p: 2, pl: 4 }} >
+                                <Typography variant="h2" >
+                                    {project}
+                                </Typography>
+                                <CodebookTab owner={owner} project={project} userName={userName} />
+                            </Stack>
                         </Grid>
-                        <Box sx={{ p: 3, width: 1 }}>
-                            <DndProvider backend={HTML5Backend}>
-                                <CodebookManager
-                                    rawCodeGroups={codeGroups}
-                                    uniqueCodesDict={uniqueCodesDict}
-                                    owner={owner}
-                                    project={project}
-                                    coders={coders}
-                                />
-                            </DndProvider>
-                        </Box>
-                    </Box >
-                }
-            </div>
-        )
+                    </Grid>
+                    <Box sx={{ p: 3, width: 1 }}>
+                        <DndProvider backend={HTML5Backend}>
+                            <CodebookManager
+                                rawCodeGroups={codeGroups}
+                                uniqueCodesDict={uniqueCodesDict}
+                                owner={owner}
+                                project={project}
+                                coders={coders}
+                            />
+                        </DndProvider>
+                    </Box>
+                </Box >
+            }
+        </div>
+    )
 
-    } else { return <NoAccess /> }
 }
