@@ -81,8 +81,8 @@
             },
             "similarity": {
                 "word1": "Cheap but low quality food.",
-                "word2": "Cheap food, outdated decoration.",
-                "score": 0.8935
+                "word2": "Cheap food, outdated decoration."
+                
             }
         },
         {
@@ -150,8 +150,7 @@
             },
             "similarity": {
                 "word1": "Cheap but meh food.",
-                "word2": "Not-advocate/Bad-food",
-                "score": 0.6638
+                "word2": "Not-advocate/Bad-food"
             }
         },
         {
@@ -213,8 +212,8 @@
             ],
             "similarity": {
                 "word1": "Limited restaurant",
-                "word2": "Limited restaurant",
-                "score": 1
+                "word2": "Limited restaurant"
+
             },
             "decision": {
                 "author": "****",
@@ -282,8 +281,8 @@
             ],
             "similarity": {
                 "word1": "Great food, beer, Smash.",
-                "word2": "Great food, beer, Smash.",
-                "score": 1
+                "word2": "Great food, beer, Smash."
+
             },
             "decision": {
                 "author": "Alice",
@@ -351,8 +350,8 @@
             ],
             "similarity": {
                 "word1": "Creamy coconut soup, pat thai.",
-                "word2": "Coconut Soup, Pat Thai, Yum!",
-                "score": 0.9232
+                "word2": "Coconut Soup, Pat Thai, Yum!"
+ 
             },
             "decision": {
                 "author": "Alice",
@@ -419,8 +418,8 @@
             ],
             "similarity": {
                 "word1": "Good pizza, nice people, BOGO.",
-                "word2": "Friendly staff, buy-one-get-one offer.",
-                "score": 0.7148
+                "word2": "Friendly staff, buy-one-get-one offer."
+
             },
             "decision": {
                 "author": [
@@ -496,8 +495,8 @@
             ],
             "similarity": {
                 "word1": "Sushi Nara: Quick and Fresh.",
-                "word2": "Friendly staff, quick service.",
-                "score": 0.6117
+                "word2": "Friendly staff, quick service."
+
             },
             "decision": {
                 "author": "****",
@@ -566,8 +565,8 @@
             ],
             "similarity": {
                 "word1": "Mistakes, but good food.",
-                "word2": "Chef Francisco, mistake-prone.",
-                "score": 0.5523
+                "word2": "Chef Francisco, mistake-prone."
+
             },
             "decision": {
                 "author": "****",

@@ -149,7 +149,7 @@ const calSim = async (words, sim_collection) => {
               resolve(calculatedList)
             }
           } catch (error) {
-            // console.log(error)
+            console.log(error)
           }
         });
 
