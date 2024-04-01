@@ -159,6 +159,7 @@ export default function EditPage() {
             setCodebookChoices(savedCodeChoices)
             setRowsContent(interviews)
             setAutocomChoices(savedAutocomChoices)
+            console.log(result.data);
         }
 
         const fetchData = async () => {

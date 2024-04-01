@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Box, Typography, Stack, Grid, Fab, CircularProgress, Drawer, Button, Collapse } from '@mui/material';
 import ProgressList from './ProgressList';
 import axios from 'axios';
@@ -22,7 +22,10 @@ const calcCohenKappa = async (codeList1, codeList2, setCK) => {
             code2: codeList2
         }
     })
-        .then(result => setCK(result.data))
+        .then(result => {
+            // console.log(result.data);
+            setCK(result.data)
+        })
         .catch(console.log);
 };
 
@@ -75,12 +78,14 @@ const processAutocomChoices = (segmented_data) => {
 const processSimilarities = (segmented_data) => {
     //note: this can only work if <= 2 collaborators in db
     const codes = segmented_data.map(sen => sen.codes.map(c => c.code)).map(array => new Set(array))
+    // console.log(segmented_data);
     if (!Object.keys(segmented_data[0]).includes("similarity")) {
         return Array(segmented_data.length - 1).fill("")
     } else {
         return segmented_data.map(sen => sen.similarity)
             .map((simiObj, index) => {
                 if (assertSetsEqual(codes[index], new Set([simiObj.word1, simiObj.word2]))) {
+                    // console.log(simiObj);
                     return simiObj.score
                 } else {
                     return ""
@@ -114,9 +119,14 @@ export default function ComparePage() {
         const [checks, setChecks] = useState([true])
         const [simiLoading, setSimiLoading] = useState(false)
         const [similarities, setSimilarities] = useState([])
-        const [ck, setCK] = React.useState("Choose 2 coders to calculate.")
-        const [agreement, setAgreement] = React.useState("Choose 2 coders to calculate.")
+        const [ck, setCK] = React.useState("Get results after Calculation")
+        const [agreement, setAgreement] = React.useState("Get results after Calculation")
         const [autocomChoices, setAutocomChoices] = useState([]);
+
+        const agreementRate = useMemo(() => {
+            if (agreement) return agreement
+            else return "Get results after Calculation"
+        }, [arguments])
 
         const [checkedProgressCard, setCheckedProgressCard] = useState(true);
 
@@ -147,21 +157,18 @@ export default function ComparePage() {
         useEffect(() => {
             setLoading(true);
             fetchData()
-            setTimeout(() => {
-                fetchData()
-            }, 500)
         }, []);
 
-        const cacheCalcedSimilarities = async (scoredict) => {
+        // const cacheCalcedSimilarities = async (scoredict) => {
 
-            const result = await axios({
-                method: 'put',
-                url: backendRoutes.SIMILARITY_URL,
-                data: {
-                    scoredict: scoredict,
-                }
-            })
-        }
+        //     const result = await axios({
+        //         method: 'put',
+        //         url: backendRoutes.SIMILARITY_URL,
+        //         data: {
+        //             scoredict: scoredict,
+        //         }
+        //     })
+        // }
 
         const calcTwoCodersSimilarity = async (segmented_data, coder0, coder1) => {
             console.log("calcTwoCodersSimilarity called")
@@ -181,7 +188,7 @@ export default function ComparePage() {
                 let tempSimilarities = processScoresResponse(scores)
                 setSimilarities(tempSimilarities);
                 setSimiLoading(false)
-                cacheCalcedSimilarities(sortScoreData(scores))
+                // cacheCalcedSimilarities(sortScoreData(scores))
                 setAgreement(calculateAgreementRate(tempSimilarities))
             }
         }
@@ -198,6 +205,8 @@ export default function ComparePage() {
                     }
                 });
                 // calc simi
+                // console.log(segmented_data, compareCoders[0], compareCoders[1])
+                // console.log(segmented_data);
                 calcTwoCodersSimilarity(segmented_data, compareCoders[0], compareCoders[1])
                 // calc ck
                 let codeList1 = cKCodeFiltering(segmented_data, compareCoders[0])
@@ -288,7 +297,7 @@ export default function ComparePage() {
                                         checks={checks}
                                         handleChecksChange={handleChecksChange}
                                         ck={ck}
-                                        agreement={agreement}
+                                        agreement={agreementRate}
                                     />
                                 </Box>
 

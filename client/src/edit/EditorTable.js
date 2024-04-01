@@ -32,6 +32,7 @@ export default function EditorTable(props) {
   const rows = props.rowsContent
   const options = props.options
 
+
   const { owner, project, userName } = useParams()
 
   const editorUpdateCode = async (newValue, id, uncertainty) => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Box, Button, CircularProgress, Typography, Tooltip, Grid, ListItem, Chip } from '@mui/material';
 import {
   DataGrid,
@@ -14,6 +14,7 @@ import CalculateIcon from '@mui/icons-material/Calculate';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import { Stack } from '@mui/system';
 import UndoIcon from '@mui/icons-material/Undo';
+
 
 const DECISION_COL_WIDTH = 320
 
@@ -143,10 +144,14 @@ export default function CompareTable(props) {
 
   let checks = props.checks
   const similarities = props.similarities
+  // console.log(similarities);
+  // const similarities = !firstOpen ? props.similarities : []
   const segmented_data = props.segmented_data
   let coders = props.coders
   const options = props.options
   const { owner, project, userName } = useParams()
+  const rowRefs = useRef(null)
+
 
   // save decision history for undo
   const [codeHistory, setCodeHistory] = useState(processCodeHistoryInit(segmented_data))
@@ -319,6 +324,7 @@ export default function CompareTable(props) {
               row={r}
               checkedCoders={checkedCoders}
               projectName={project}
+
             />
             <Stack direction='column' sx={{ width: 50 }}>
               <span disabled={disableReplace}>
