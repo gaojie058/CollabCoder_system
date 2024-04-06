@@ -260,7 +260,7 @@ export const CodebookManager = memo(function Container({ uniqueCodesDict, rawCod
                   aria-label="Add new group"
                   onClick={generateGroups}
                 >
-                  Create Code Groups by AI
+                  Create Code Groups by GPT
                 </Button>
                 <Button
                   variant="contained"

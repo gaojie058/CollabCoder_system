@@ -154,13 +154,13 @@ export default function ComparePage() {
 
     const cacheCalcedSimilarities = async (scoredict) => {
 
-        const result = await axios({
-            method: 'put',
-            url: backendRoutes.SIMILARITY_URL,
-            data: {
-                scoredict: scoredict,
-            }
-        })
+        // const result = await axios({
+        //     method: 'put',
+        //     url: backendRoutes.SIMILARITY_URL,
+        //     data: {
+        //         scoredict: scoredict,
+        //     }
+        // })
     }
 
     const calcTwoCodersSimilarity = async (segmented_data, coder0, coder1) => {
@@ -181,7 +181,7 @@ export default function ComparePage() {
             let tempSimilarities = processScoresResponse(scores)
             setSimilarities(tempSimilarities);
             setSimiLoading(false)
-            cacheCalcedSimilarities(sortScoreData(scores))
+            // cacheCalcedSimilarities(sortScoreData(scores))
             setAgreement(calculateAgreementRate(tempSimilarities))
         }
     }
