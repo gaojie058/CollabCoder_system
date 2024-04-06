@@ -123,10 +123,14 @@ export default function ComparePage() {
         const [agreement, setAgreement] = React.useState("Get results after Calculation")
         const [autocomChoices, setAutocomChoices] = useState([]);
 
+        const [opended, setOpended] = useState(false);
+
         const agreementRate = useMemo(() => {
             if (agreement) return agreement
             else return "Get results after Calculation"
         }, [arguments])
+
+        console.log(agreementRate);
 
         const [checkedProgressCard, setCheckedProgressCard] = useState(true);
 
@@ -138,10 +142,10 @@ export default function ComparePage() {
             setAutocomChoices(processAutocomChoices(p.segmented_data))
             setChecks(checks.concat(Array(p.coders.length - 1).fill(false)))
             let tempSimilarities = processSimilarities(p.segmented_data)
-            setSimilarities(tempSimilarities)
+            // setSimilarities(tempSimilarities)
             setAllProgress(result.data[1])
             setCoders(swapUser(p, userName))
-            setAgreement(calculateAgreementRate(tempSimilarities))
+            // setAgreement(calculateAgreementRate(tempSimilarities))
         }
 
         const fetchData = async () => {
@@ -189,6 +193,7 @@ export default function ComparePage() {
                 setSimilarities(tempSimilarities);
                 setSimiLoading(false)
                 // cacheCalcedSimilarities(sortScoreData(scores))
+                setOpended(true)
                 setAgreement(calculateAgreementRate(tempSimilarities))
             }
         }
