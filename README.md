@@ -1,9 +1,12 @@
 <!-- ![collab-coder](./figure/DiffCoder-blue.svg) -->
-<figure style="display: flex; justify-content: center;">
-  <img src="./figure/logo-blue.svg" alt="Image 1 Description" style="width: 20%;">
-  <img src="./figure/Collab-coder.svg" alt="Image 2 Description"
-  style="width:70%">
-</figure>
+<!-- <figure style="display: flex; justify-content: center;">
+  <img src="./figure/logo-blue.svg"  style="width: 20%;">
+  <img src="./figure/Collab-coder.svg" style="width:70%">
+</figure> -->
+
+<!-- | --- | --- | -->
+
+<img src="./figure/logo-blue.svg" width="20%"> <img src="./figure/Collab-coder.svg" width="70%">
 
 <br/>
 
