@@ -53,6 +53,8 @@ The effectiveness of CollabCoder has been confirmed by a 16-user evaluation due 
         -   [2.3 Install backend dependencies](#23-install-backend-dependencies)
     -   [3.0 Add .env to backend](#30-add-env-to-backend)
 -   [Running](#running)
+    -   [Run the backend first](#run-the-backend-first)
+    -   [Run the frontend](#run-the-frontend)
 -   [Building](#building)
 -   [Related Papers](#related-papers)
 -   [Citations](#citations)
@@ -169,12 +171,16 @@ Explanation of some environment variables:
 
 # **Running**
 
+## Run the backend first
+
 ```
 cd .\backend\
 
 # Launch the backend in development mode
 npm run start
 ```
+
+## Run the frontend
 
 ```
 cd .\client\
