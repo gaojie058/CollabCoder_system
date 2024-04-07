@@ -13,9 +13,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python: 3.8|3.9|3.10|3.11|3.12](https://img.shields.io/badge/Python-3.8|3.9|3.10|3.11|3.12-blue.svg)](https://www.python.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-green.svg)](https://nodejs.org/en/)
-[![React](https://img.shields.io/badge/React-5fcfef.svg)](https://reactjs.org/)
+[![Frontend:React](https://img.shields.io/badge/fronent-React-5fcfef.svg)](https://reactjs.org/)
 [![Language: JavaScript](https://img.shields.io/badge/Language-JavaScript-ebd94d.svg)](https://www.javascript.com/)
 [![Backend:Express.js](https://img.shields.io/badge/Backend-Express.js-green.svg)](https://expressjs.com/)
+[![version:1.0.0](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/gaojie058/CollabCoder-Project)
 
 # Background
 
@@ -37,21 +38,42 @@ Beyond basic functionalities, **CollabCoder integrates GPT** to achieve multiple
 
 The effectiveness of CollabCoder has been confirmed by a 16-user evaluation due to its user-friendly design and AI assistance tailored for collaboration.
 
+# Directory
+
+-   [video](#video)
+-   [installation](#installation)
+    -   [1.0 Prerequisites](#10-prerequisites)
+        -   [1.1 install node.js](#11-install-nodejs)
+        -   [1.2 set up the Python environment](#12-set-up-the-python-environment)
+        -   [1.3 create a cloud database](#13-create-a-cloud-database)
+        -   [1.4 get an OpenAI API key](#14-get-an-openai-api-key)
+    -   [2.0 Get the CollabCoder Source](#20-get-the-collabcoder-source)
+        -   [2.1 Clone the repository](#21-clone-the-repository)
+        -   [2.2 Install frontend dependencies](#22-install-frontend-dependencies)
+        -   [2.3 Install backend dependencies](#23-install-backend-dependencies)
+    -   [3.0 Add .env to backend](#30-add-env-to-backend)
+-   [Running](#running)
+-   [Building](#building)
+-   [Related Papers](#related-papers)
+-   [Citations](#citations)
+
 # Video
 
-Here is a video that introduces CollabCoder's motivation and demonstration: [CollabCoder's Motivation and Demo (youtube.com)](https://www.youtube.com/watch?v=fxZ0_BI0XCA)
+Here is a video that introduces CollabCoder's motivation and demonstration:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fxZ0_BI0XCA?si=Fu3-nHqVusVQoxWc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 # Installation
 
 Please follow these steps to install CollabCoder.
 
-## Prerequisites
+## 1.0 Prerequisites
 
-### install node.js
+### 1.1 install node.js
 
-Before you start setting the frontend environment, ensure node.js is installed. Open a terminal window and type `node -v` to check whether you have set up your Node.js backend.
+Before you start setting the frontend environment, ensure node.js is installed. Open a terminal window and type `node -v` and `npm -v` to check whether you have install your Node.js and npm.
 
-### set up the Python environment
+### 1.2 set up the Python environment
 
 Given that some APIs require Python, you need to verify and set up the Python environment. Open a terminal window and type ` python --version` to find out if it is already installed and which version is installed.
 
@@ -61,7 +83,7 @@ After checking that everything is correct, run this command:
 pip install torch transformers sentence-transformers
 ```
 
-### create a cloud database
+### 1.3 create a cloud database
 
 We highly recommend use the MongoDB Atlas cloud service provided by MongoDB. Follow these steps:
 
@@ -74,19 +96,25 @@ Note:
 -   ensure the database is started
 -   ensure the database allows access from your device's IP
 
-Save this URL address and use it later during environment variables configurations.
+Save this URL address and use it later in `DB_URL`.
 
 If you have other options besides MongoDB Atlas, it is ok.
 
-### get an OpenAI API key
+### 1.4 get an OpenAI API key
 
 Get an API key from OpenAI for GPT usage.
 
-## Get the CollabCoder Source
+Save this API key and use it later in `OPENAI_API_KEY`.
+
+## 2.0 Get the CollabCoder Source
+
+### 2.1 Clone the repository
 
 ```
 git clone https://github.com/gaojie058/CollabCoder-Project.git
 ```
+
+### 2.2 Install frontend dependencies
 
 If you finish steps above and check that everything is correct, then you can run this command:
 
@@ -100,6 +128,8 @@ npm install
 
 Now the frontend environment is set up.
 
+### 2.3 Install backend dependencies
+
 Then you can start setting up the backend environment:
 
 ```
@@ -110,7 +140,7 @@ cd .\backend\
 npm install
 ```
 
-## Add .env to backend
+## 3.0 Add .env to backend
 
 Before launching, add a `.env` file in the backend directory by doing the following:
 
@@ -127,8 +157,13 @@ Explanation of some environment variables:
 
 -   `SECRET_KEY`: the key of jsonwebtoken
 -   `PORT`: the port which the server listens on
--   `OPENAI_API_KEY`: the API Key provided by OpenAI which is required when executing a GPT API call
--   `DB_URI`: `connection string` mentioned above
+-   `OPENAI_API_KEY`: the API Key provided by OpenAI which is required when executing a GPT API call.Mentioned in step [1.4](#14-get-an-openai-api-key)
+
+    for example:`sk-xxxxxxxxxxxxxxxxxxxxxxxxx`
+
+-   `DB_URI`: `connection string` mentioned in step [1.3](#13-create-a-cloud-database)
+
+    for example:`mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retryWrites=true&w=majority`
 
 ---
 
