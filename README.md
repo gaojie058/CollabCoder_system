@@ -63,7 +63,9 @@ The effectiveness of CollabCoder has been confirmed by a 16-user evaluation due 
 
 Here is a video that introduces CollabCoder's motivation and demonstration:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fxZ0_BI0XCA?si=Fu3-nHqVusVQoxWc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/fxZ0_BI0XCA?si=Fu3-nHqVusVQoxWc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
 
 # Installation
 
