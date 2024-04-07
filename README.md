@@ -6,7 +6,7 @@
 
 <!-- | --- | --- | -->
 
-<img src="./figure/logo-blue.svg" width="20%"> <img src="./figure/Collab-coder.svg" width="70%">
+<img src="./figure/logo-blue.svg" width="20%"> <img src="./figure/Collab-coder.svg" width="79%">
 
 <br/>
 
