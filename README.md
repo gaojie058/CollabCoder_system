@@ -21,9 +21,9 @@
 
 ## 🐱‍💻 Preview
 
-😊 As CollabCoder is a web application that requires collaboration between two people, we currently lack the resources to support this application. However, we are providing a <a href="http://16.16.202.78/Demouser/demo/edit/Demouser">sample demo</a> for you to try! In the "Installation" section, we provide specific steps to <strong>install</strong>, <strong>run</strong> and <strong>use</strong> it on your computer. 
+😊 As CollabCoder is a web application that requires collaboration between two people, we currently lack the resources to support this application. However, we are providing a [sample demo](http://16.16.202.78/Demouser/demo/edit/Demouser) for you to try! In the "Installation" section, we provide specific steps to **install**, **run** and **use** it on your computer. 
 
-🚀 Here is a video that introduces CollabCoder's motivation and demostration: <a href="https://www.youtube.com/watch?v=fxZ0_BI0XCA">CollabCoder's Motivation and Demo (YouTube)</a>
+🚀 Here is a video that introduces CollabCoder's motivation and demostration: [CollabCoder's Motivation and Demo (YouTube)](https://youtu.be/C3n4UvMHgIY)
 
 
 
@@ -54,9 +54,10 @@
 - [🚀 Running](#-running)
   - [Run the backend](#run-the-backend)
   - [Run the frontend](#run-the-frontend)
-- [Building](#building)
-- [Related Papers](#related-papers)
-- [Citation](#citation)
+- [📦 Building](#-building)
+- [📖 Related Papers](#-related-papers)
+- [🙋‍♀️ Code Contributors](#️-code-contributors)
+- [📧 Contact](#-contact)
 
 
 ## 🔨 Installation
@@ -183,7 +184,7 @@ cd .\client\
 npm run start
 ```
 
-## Building
+## 📦 Building
 
 For production, build the frontend:
 
@@ -194,14 +195,23 @@ cd .\client\
 npm run build
 ```
 
-## Related Papers
+## 📖 Related Papers
 
-[CollabCoder: A GPT-Powered Workflow for Collaborative Qualitative Analysis](https://arxiv.org/abs/2304.07366)
+[CollabCoder: A Lower-barrier, Rigorous Workflow for Inductive Collaborative Qualitative Analysis with Large Language Models](https://arxiv.org/abs/2304.07366)
+
+[CollabCoder: A GPT-Powered Workflow for Collaborative Qualitative Analysis](https://dl.acm.org/doi/10.1145/3584931.3607500)
 
 [CoAIcoder: Examining the Effectiveness of AI-assisted Human-to-Human Collaboration in Qualitative Analysis](https://arxiv.org/abs/2304.05560)
 
-## Citation
 
-@misc{gao2023collabcoder, title={CollabCoder: A GPT-Powered Workflow for Collaborative Qualitative Analysis}, author={Jie Gao and Yuchen Guo and Gionnieve Lim and Tianqin Zhang and Zheng Zhang and Toby Jia-Jun Li and Simon Tangi Perrault}, year={2023}, eprint={2304.07366}, archivePrefix={arXiv}, primaryClass={cs.HC} }
+## 🙋‍♀️ Code Contributors
+| Period                | Contribution                | Contributors                                                |
+|-----------------------|-----------------------------|-------------------------------------------------------------|
+| 2024.03-Present       | System Refinement           | Jie Gao, Jinpeng Lin                                         |
+| 2022.10-2023.03       | Primary System Building     | Jie Gao, Yuchen Guo, Tianqin Zhang                          |
+| 2022.09-2023.02       | System Ideation             | Jie Gao, Simon Perrault, Yuchen Guo, Tianqin Zhang, Zheng Zhang |
 
-Please contact the author (https://gaojie058.github.io/) for any questions: [gaojie056@gmail.com](mailto:gaojie056@gmail.com).
+
+## 📧 Contact
+
+Please contact Jie Gao (https://gaojie058.github.io/) for any questions: [gaojie056@gmail.com](mailto:gaojie056@gmail.com).
