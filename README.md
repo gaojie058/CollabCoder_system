@@ -19,13 +19,11 @@
 
 **CollabCoder** is a one-stop, end-to-end **Collaborative Qualitative Analysis (CQA)** workflow that integrates **Large Language Models (LLMs)** into key _inductive_ CQA stages aligned with the standard CQA process, aiming to lower the bar for adhering to a strict **Collaborative Qualitative Analysis (CQA)** procedure.
 
+## 🐱‍💻 Preview
 
-<div style="border: 2px #000000; padding: 10px; margin: 10px;background-color: #f7cf87; border-radius: 10px;">
-  😊 As CollabCoder is a web application that requires collaboration between two people, we currently lack the resources to support this application. However, we are providing a <a href="http://16.16.202.78/Demouser/demo/edit/Demouser">sample demo</a> for you to try! In the following, you can follow these steps to <strong>install</strong>, <strong>run</strong> and <strong>use</strong> it on your computer. <i>Note: Ensuring that you have basic coding knowledge.</i>
-   <br>
-   <br>
-  🚀 Here is a video that introduces CollabCoder's motivation and demostration: <a href="https://www.youtube.com/watch?v=fxZ0_BI0XCA">CollabCoder's Motivation and Demo (YouTube)</a>
-</div>
+😊 As CollabCoder is a web application that requires collaboration between two people, we currently lack the resources to support this application. However, we are providing a <a href="http://16.16.202.78/Demouser/demo/edit/Demouser">sample demo</a> for you to try! In the "Installation" section, we provide specific steps to <strong>install</strong>, <strong>run</strong> and <strong>use</strong> it on your computer. 
+
+🚀 Here is a video that introduces CollabCoder's motivation and demostration: <a href="https://www.youtube.com/watch?v=fxZ0_BI0XCA">CollabCoder's Motivation and Demo (YouTube)</a>
 
 
 
@@ -39,6 +37,7 @@
 
 ## 📚 Directory
 
+- [🐱‍💻 Preview](#-preview)
 - [⭐ Features](#-features)
 - [📚 Directory](#-directory)
 - [🔨 Installation](#-installation)
