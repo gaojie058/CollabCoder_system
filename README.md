@@ -34,7 +34,7 @@ Beyond basic functionalities, **CollabCoder integrates GPT** to achieve multiple
 -   aiding the conversion of open codes into final code decisions; and
 -   providing initial versions of code groups, derived from these code decisions, for coders to further refine and adjust.
 
-![teaser.png](figure/teaser.jpg)
+![teaser.png](figure/teaser.png)
 
 The effectiveness of CollabCoder has been confirmed by a 16-user evaluation due to its user-friendly design and AI assistance tailored for collaboration.
 
@@ -63,9 +63,9 @@ The effectiveness of CollabCoder has been confirmed by a 16-user evaluation due 
 
 Here is a video that introduces CollabCoder's motivation and demonstration:
 
-<div>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/fxZ0_BI0XCA?si=Fu3-nHqVusVQoxWc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div>
+<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/fxZ0_BI0XCA?si=Fu3-nHqVusVQoxWc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+
+[CollabCoder's Motivation and Demo (youtube.com)](https://www.youtube.com/watch?v=fxZ0_BI0XCA)
 
 # Installation
 
