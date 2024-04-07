@@ -1,5 +1,5 @@
 // backend routings for frontend
-const baseUrl = "http://localhost:5000/"
+const baseUrl = "http://localhost:5001/"
 // const baseUrl = process.env.BASE_URL
 const backendRoutes = {
     DOCUMENT_URL: baseUrl + "document/",
