@@ -117,7 +117,7 @@ If you finish steps above and check that everything is correct, then you can run
 
 ```
 # navigate to the client directory
-cd .\client\
+cd client
 
 # install dependencies
 npm install
@@ -131,7 +131,7 @@ Then you can start setting up the backend environment:
 
 ```
 # switch to the backend directory
-cd .\backend\
+cd backend
 
 # install dependencies
 npm install
@@ -169,7 +169,7 @@ Explanation of some environment variables:
 ### Run the backend
 
 ```
-cd .\backend\
+cd backend
 
 # Launch the backend in development mode
 npm run start
@@ -178,7 +178,7 @@ npm run start
 ### Run the frontend
 
 ```
-cd .\client\
+cd client
 
 # Launch the frontend in development mode
 npm run start
@@ -189,7 +189,7 @@ npm run start
 For production, build the frontend:
 
 ```
-cd .\client\
+cd client
 
 # build the frontend
 npm run build
