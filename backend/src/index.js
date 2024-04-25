@@ -2,7 +2,7 @@ const app = require('./app');
 const dbo = require("./db/Connection");
 
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 app.get('/', (req, res) => {
   res.send('请求成功');
