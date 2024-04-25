@@ -4,7 +4,7 @@ import axios from 'axios';
 // 创建axios实例
 const instance = axios.create({
     // baseURL: process.env.BASE_URL,
-    baseURL: 'http://localhost:5001/',
+    baseURL: 'http://localhost:5000/',
     timeout: 10000,
 })
 
