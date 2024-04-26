@@ -86,7 +86,7 @@ We highly recommend use the MongoDB Atlas cloud service provided by MongoDB. Fol
 
 -   Visit [Mongo Cloud](https://www.mongodb.com/cloud/atlas) and create a free database.
     -   Refer to [this video tutorial](https://m.youtube.com/watch?v=xrc7dIO_tXk&list=PL4RCxklHWZ9vmzBP7lybE08CxbIU17PIf&index=1&pp=iAQB) for guidance.
--   get `connection string` which is the URL address of the database.
+-   get `connection string` which is the URL address of the database. E.g. `mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retryWrites=true&w=majority`
 
 Note:
 
@@ -145,22 +145,20 @@ Before launching, add a `.env` file in the backend directory by doing the follow
 NODE_ENV=development
 SECRET_KEY='your secret key'
 OPENAI_API_KEY='your openAI api key'
-PORT = 5000
+PORT = 5001
 DB_URI='your mongodb database url'
 PYTHON_PATH='python'
 ```
 
 Explanation of some environment variables:
 
--   `SECRET_KEY`: the key of jsonwebtoken
+-   `SECRET_KEY`: the key of json web token. Input any string you want, for example, "123abc" (Please do not use this one)
 -   `PORT`: the port which the server listens on
 -   `OPENAI_API_KEY`: the API Key provided by OpenAI which is required when executing a GPT API call.Mentioned in step [1.4](#14-get-an-openai-api-key)
 
     for example:`sk-xxxxxxxxxxxxxxxxxxxxxxxxx`
 
 -   `DB_URI`: `connection string` mentioned in step [1.3](#13-create-a-cloud-database)
-
-    for example:`mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retryWrites=true&w=majority`
 
 ---
 
