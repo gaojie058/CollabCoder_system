@@ -62,6 +62,8 @@ const checkNoSameNameExist = async (tempProjName, userName) => {
 
 }
 
+
+
 export default function AddNewProjectPage() {
     const userName = useUserStore((state) => state.name)
 
@@ -124,19 +126,38 @@ export default function AddNewProjectPage() {
 
     const handleConfirm = async () => {
 
+
+
         // concat all file text
         if (files.length > 0) {
             let text = ""
             const file_names = files[0].name
             // let numOfFiles = localStorage.getItem("num_of_files")
-            for (let i = 0; i < files.length; i++) {
-                // text += localStorage.getItem(`file${i}`).toString()
-                const reader = new FileReader()
-                reader.onload = async (e) => {
-                    text += e.target.result.toString()
+            // for (let i = 0; i < files.length; i++) {
+            //     // text += localStorage.getItem(`file${i}`).toString()
+            //     const reader = new FileReader()
+            //     reader.onload = async (e) => {
+            //         text += await e.target.result.toString()
+            //     }
+            //     reader.readAsText(files[i], 'utf-8')
+            // }
+            const readFileAsText = (file) => {
+                return new Promise((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.onload = () => resolve(reader.result);
+                  reader.onerror = () => reject(reader.error);
+                  reader.readAsText(file, 'utf-8');
+                });
+              };
+
+            const readFile = async ()=>{
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    text += await readFileAsText(file);
                 }
-                reader.readAsText(files[i], 'utf-8')
             }
+
+            await readFile()
 
             // send project object
             let projectObj = createProjectObj(
@@ -157,6 +178,9 @@ export default function AddNewProjectPage() {
             //         navigate(createEditUrl(userName, projectName, userName))
             //     )
             //     .catch(console.log);
+            
+
+            // console.log(projectObj);
             const result = await useAddProject(projectObj)
             if (result) {
                 navigate(createEditUrl(userName, projectName, userName))

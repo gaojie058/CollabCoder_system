@@ -176,9 +176,9 @@ export default function EditPage() {
     useEffect(() => {
         setLoading(true);
         fetchData()
-        // setTimeout(() => {
-        //     fetchData()
-        // }, 1000)
+        setTimeout(() => {
+            fetchData()
+        }, 1000)
     }, []);
 
     const updateKeyword = (rowId, keyword) => {

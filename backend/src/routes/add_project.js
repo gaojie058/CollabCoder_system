@@ -29,8 +29,6 @@ addprojectRouter.route('/').post(async (req, res) => {
       : codingLevel === 'Paragraph' ? split_into_paragraphs(text)
         : [];
   }
-
-
   if (segmented_data) {
 
     myobj["segmented_data"] = segmented_data.map((interview, index) => {
@@ -54,9 +52,13 @@ addprojectRouter.route('/').post(async (req, res) => {
         )
       }
     }).filter(data => data != undefined && data != null)
-    insert(db_connect, "projects", [myobj])
-      .then(res.json({ message: 'success' }))
-      .catch(res.json({ message: 'failed' }))
+    insert(db_connect, "projects", [myobj]) 
+      .then(()=>{
+        res.json({ message: 'success' })
+      })
+      .catch(()=>{
+        res.json({ message: 'failed' })
+      })
   }
 });
 
