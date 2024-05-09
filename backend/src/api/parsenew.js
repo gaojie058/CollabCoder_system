@@ -41,7 +41,8 @@ function split_into_sentences(text){
         text = text.replaceAll("<prd>",".")
         sentences = text.split("<stop>")
         // sentences = text.split(".")
-        return sentences}
+        return sentences
+}
 
 
 function split_into_paragraphs(text){

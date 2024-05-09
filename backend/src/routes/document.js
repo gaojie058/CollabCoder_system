@@ -10,6 +10,7 @@ documentRouter.route("/:project").get(function (req, res) {
   let myDb = dbo.getDb();
   let filter = { name: req.params.project }
   query(myDb, collection, filter).then(value => {
+    console.log(value[0])
     res.json(value[0].segmented_data)
     res.end()
   })
